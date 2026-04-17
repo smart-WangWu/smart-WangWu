@@ -1,0 +1,56 @@
+<view class="page">
+  <!-- 顶部标签切换 -->
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 'following' ? 'active' : ''}}" bindtap="onTabChange" data-tab="following">
+      <text class="tab-text">关注 {{followingCount}}</text>
+    </view>
+    <view class="tab-item {{currentTab === 'followers' ? 'active' : ''}}" bindtap="onTabChange" data-tab="followers">
+      <text class="tab-text">粉丝 {{followersCount}}</text>
+    </view>
+  </view>
+
+  <!-- 空状态 - 关注 -->
+  <view class="empty" wx:if="{{currentTab === 'following' && followList.length === 0}}">
+    <text class="empty-icon">👥</text>
+    <text class="empty-text">还没有关注任何人</text>
+    <text class="empty-hint">去随行客发现感兴趣的人吧</text>
+    <view class="empty-btn" bindtap="onGotoCompanion">
+      <text class="btn-text">去随行客逛逛</text>
+    </view>
+  </view>
+
+  <!-- 空状态 - 粉丝 -->
+  <view class="empty" wx:if="{{currentTab === 'followers' && followList.length === 0}}">
+    <text class="empty-icon">🌟</text>
+    <text class="empty-text">还没有粉丝</text>
+    <text class="empty-hint">快去发布内容吸引关注吧</text>
+  </view>
+
+  <!-- 关注列表 -->
+  <view class="user-list" wx:if="{{followList.length > 0}}">
+    <view class="user-card" wx:for="{{followList}}" wx:key="id">
+      <view class="card-left" bindtap="onUserTap" data-id="{{item.id}}">
+        <image class="user-avatar" src="{{item.avatar}}" mode="aspectFill"/>
+        <view class="user-info">
+          <view class="user-name-row">
+            <text class="user-name">{{item.nickname}}</text>
+            <view class="vip-badge" wx:if="{{item.isVip}}">
+              <text class="badge-icon">V</text>
+            </view>
+          </view>
+          <text class="user-desc">{{item.desc || '这个人很懒，什么都没写'}}</text>
+          <view class="user-stats">
+            <text class="stat-text">笔记 {{item.noteCount}}</text>
+            <text class="stat-divider">|</text>
+            <text class="stat-text">粉丝 {{item.followerCount}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="card-right">
+        <view class="follow-btn {{item.isMutual ? 'mutual' : ''}}" bindtap="onUnfollow" data-id="{{item.id}}">
+          <text class="btn-text">{{item.isMutual ? '互相关注' : '已关注'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

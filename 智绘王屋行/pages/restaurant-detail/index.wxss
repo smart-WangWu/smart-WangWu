@@ -1,0 +1,1186 @@
+/* 商家详情：浅色大众点评信息流 */
+.dp-root {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.dp-scroll {
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+/* ── 头图 ── */
+.dp-cover-wrap {
+  position: relative;
+  width: 100%;
+  height: 400rpx;
+  background: #e0e0e0;
+}
+
+.dp-cover-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dp-cover-actions {
+  position: absolute;
+  right: 24rpx;
+  bottom: 24rpx;
+  display: flex;
+  flex-direction: row;
+  gap: 14rpx;
+}
+
+.dp-cover-pill {
+  padding: 10rpx 22rpx;
+  font-size: 24rpx;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 999rpx;
+}
+
+.dp-cover-pill--a {
+  opacity: 0.85;
+}
+
+/* ── 主体容器 ── */
+.dp-body {
+  background: #f5f5f5;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ── 标题区 ── */
+.dp-title-block {
+  padding: 28rpx 28rpx 22rpx;
+  background: #ffffff;
+  margin-bottom: 20rpx;
+}
+
+.dp-title-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-bottom: 14rpx;
+}
+
+.dp-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 40rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.3;
+}
+
+.dp-chain {
+  font-size: 22rpx;
+  color: #c9a227;
+  border: 1rpx solid rgba(201, 162, 39, 0.55);
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+  align-self: flex-start;
+  margin-top: 6rpx;
+  flex-shrink: 0;
+}
+
+.dp-rate-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12rpx 22rpx;
+  margin-bottom: 12rpx;
+}
+
+.dp-stars {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.dp-star {
+  font-size: 28rpx;
+  line-height: 1;
+  margin-right: 2rpx;
+}
+
+.dp-star--full {
+  color: #ff6633;
+}
+
+.dp-star--empty {
+  color: #d8d8d8;
+}
+
+.dp-star--sm {
+  font-size: 22rpx;
+}
+
+/* 半星 */
+.dp-star-half-wrap {
+  position: relative;
+  display: inline-flex;
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 2rpx;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.dp-star-half-wrap--sm {
+  width: 22rpx;
+  height: 22rpx;
+}
+
+.dp-star-half-wrap .dp-star {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-right: 0;
+}
+
+.dp-star--clip {
+  clip-path: inset(0 50% 0 0);
+}
+
+.dp-score {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #ff6633;
+}
+
+.dp-reviews {
+  font-size: 26rpx;
+  color: #888888;
+}
+
+.dp-avg {
+  font-size: 26rpx;
+  color: #888888;
+}
+
+.dp-subrate {
+  font-size: 24rpx;
+  color: #999999;
+  margin-bottom: 12rpx;
+}
+
+.dp-subgap {
+  margin-left: 28rpx;
+}
+
+.dp-cate-line {
+  font-size: 26rpx;
+  color: #666666;
+  margin-bottom: 16rpx;
+}
+
+.dp-rank-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #fff8f4;
+  border-radius: 10rpx;
+  padding: 14rpx 18rpx;
+}
+
+.dp-rank-bar--a {
+  opacity: 0.9;
+}
+
+.dp-rank-badge {
+  font-size: 22rpx;
+  color: #ffffff;
+  background: linear-gradient(90deg, #ff8833, #ff6633);
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+  margin-right: 14rpx;
+}
+
+.dp-rank-text {
+  flex: 1;
+  font-size: 26rpx;
+  color: #666666;
+}
+
+/* ── 通用区块 ── */
+.dp-section {
+  margin: 0 24rpx 20rpx;
+  padding: 24rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+}
+
+.dp-section--tight {
+  padding-bottom: 16rpx;
+}
+
+.dp-section--last {
+  margin-bottom: 0;
+}
+
+.dp-hours-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  font-size: 28rpx;
+  color: #1a1a1a;
+  margin-bottom: 14rpx;
+}
+
+.dp-hours-main {
+  color: #52c41a;
+  margin-right: 8rpx;
+}
+
+.dp-hours-time {
+  color: #666666;
+  flex: 1;
+  min-width: 0;
+}
+
+.dp-link-r {
+  font-size: 26rpx;
+  color: #888888;
+}
+
+.dp-facility-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12rpx 20rpx;
+}
+
+.dp-facility {
+  font-size: 24rpx;
+  color: #888888;
+}
+
+/* ── 地址区 ── */
+.dp-addr-main {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.45;
+  margin-bottom: 10rpx;
+}
+
+.dp-chev {
+  color: #cccccc;
+}
+
+.dp-addr-sub {
+  font-size: 24rpx;
+  color: #aaaaaa;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+/* ── 区块头部 ── */
+.dp-sec-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.dp-sec-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.dp-sec-title--solo {
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.dp-sec-more {
+  font-size: 26rpx;
+  color: #888888;
+}
+
+.dp-sec-guarantee {
+  display: flex;
+  flex-direction: row;
+  gap: 16rpx;
+}
+
+.dp-guarantee-i {
+  font-size: 22rpx;
+  color: #999999;
+}
+
+/* ── 套餐卡片 ── */
+.dp-deal {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.dp-deal:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.dp-deal:first-child {
+  padding-top: 0;
+}
+
+.dp-deal-img {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 10rpx;
+  flex-shrink: 0;
+  background: #e8e8e8;
+}
+
+.dp-deal-mid {
+  flex: 1;
+  min-width: 0;
+  margin: 0 14rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dp-deal-title-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8rpx;
+  margin-bottom: 8rpx;
+}
+
+.dp-deal-tag {
+  font-size: 20rpx;
+  color: #ff7744;
+  border: 1rpx solid rgba(255, 102, 51, 0.35);
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+  flex-shrink: 0;
+}
+
+.dp-deal-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.35;
+}
+
+.dp-deal-rule {
+  font-size: 22rpx;
+  color: #999999;
+  margin-bottom: 8rpx;
+}
+
+.dp-deal-price-row {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.dp-deal-price {
+  font-size: 36rpx;
+  font-weight: 800;
+  color: #ff6633;
+}
+
+.dp-deal-discount {
+  font-size: 22rpx;
+  color: #ff6633;
+}
+
+.dp-deal-orig {
+  font-size: 22rpx;
+  color: #bbbbbb;
+  text-decoration: line-through;
+}
+
+.dp-deal-right {
+  width: 110rpx;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.dp-deal-btn {
+  padding: 10rpx 24rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(90deg, #ff8833, #ff5522);
+  border-radius: 999rpx;
+}
+
+.dp-deal-btn--a {
+  opacity: 0.85;
+}
+
+.dp-deal-sales {
+  font-size: 20rpx;
+  color: #aaaaaa;
+  text-align: right;
+}
+
+/* ── 推荐菜 ── */
+.dp-dish-sub {
+  font-size: 26rpx;
+  color: #888888;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.dp-dish-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.dp-dish-cell {
+  width: 33.33%;
+  box-sizing: border-box;
+  padding: 10rpx 8rpx 10rpx 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6rpx;
+}
+
+.dp-dish-cell--liked {
+  background: #fff5f0;
+  border-radius: 12rpx;
+  padding: 10rpx 12rpx 10rpx 8rpx;
+}
+
+.dp-dish-name {
+  font-size: 26rpx;
+  color: #333333;
+  max-width: 100%;
+}
+
+.dp-dish-like {
+  font-size: 22rpx;
+  color: #aaaaaa;
+  transition: color 0.2s;
+}
+
+.dp-dish-like--on {
+  color: #ff5500;
+  font-weight: 600;
+}
+
+/* ── 商户信息 ── */
+.dp-info-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-bottom: 28rpx;
+}
+
+.dp-info-row:last-child {
+  margin-bottom: 0;
+}
+
+.dp-info-icon {
+  width: 40rpx;
+  font-size: 28rpx;
+  color: #bbbbbb;
+  margin-right: 12rpx;
+  flex-shrink: 0;
+}
+
+.dp-info-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.dp-info-label-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 8rpx;
+}
+
+.dp-info-label {
+  font-size: 28rpx;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.dp-info-status {
+  font-size: 20rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+  border-width: 1rpx;
+  border-style: solid;
+}
+
+.dp-info-status--open {
+  color: #52c41a;
+  border-color: rgba(82, 196, 26, 0.4);
+}
+
+.dp-info-status--rest {
+  color: #ff6b6b;
+  border-color: rgba(255, 107, 107, 0.4);
+}
+
+.dp-info-val {
+  font-size: 26rpx;
+  color: #666666;
+  line-height: 1.5;
+}
+
+.dp-amenity-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12rpx 20rpx;
+  margin-top: 8rpx;
+}
+
+.dp-amenity {
+  font-size: 24rpx;
+  color: #888888;
+  width: 30%;
+  box-sizing: border-box;
+}
+
+/* ── 问大家 ── */
+.dp-qa-list {
+  margin-bottom: 18rpx;
+}
+
+.dp-qa-item {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06);
+  border: 1rpx solid rgba(0,0,0,0.04);
+}
+
+.dp-qa-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44rpx;
+  height: 44rpx;
+  font-size: 22rpx;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ff7a3d, #ff4d1a);
+  border-radius: 10rpx;
+  margin-right: 16rpx;
+  flex-shrink: 0;
+  margin-top: 4rpx;
+  box-shadow: 0 4rpx 10rpx rgba(255,77,26,0.3);
+}
+
+.dp-qa-body {
+  flex: 1;
+  min-width: 0;
+  margin-top: 4rpx;
+}
+
+.dp-qa-q {
+  font-size: 28rpx;
+  color: #333333;
+  display: block;
+  margin-bottom: 8rpx;
+  line-height: 1.45;
+}
+
+.dp-qa-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 10rpx;
+}
+
+.dp-qa-user {
+  font-size: 22rpx;
+  color: #ff6633;
+}
+
+.dp-qa-date {
+  font-size: 22rpx;
+  color: #bbbbbb;
+}
+
+.dp-qa-status {
+  font-size: 24rpx;
+  color: #aaaaaa;
+  flex-shrink: 0;
+  margin-left: 12rpx;
+}
+
+/* 回答列表 */
+.dp-answer-list {
+  margin-bottom: 14rpx;
+  padding-left: 60rpx;
+}
+
+.dp-answer-item {
+  padding: 16rpx 20rpx;
+  background: #f7f8fa;
+  border-radius: 12rpx;
+  margin-bottom: 12rpx;
+  border-left: 4rpx solid #ff7a3d;
+}
+
+.dp-answer-item--owner {
+  background: #fff8f4;
+  border-left-color: #ff4d1a;
+}
+
+.dp-answer-hd {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6rpx;
+}
+
+.dp-answer-user {
+  font-size: 24rpx;
+  color: #ff6633;
+  font-weight: 600;
+}
+
+.dp-answer-date {
+  font-size: 22rpx;
+  color: #bbbbbb;
+}
+
+.dp-answer-txt {
+  font-size: 26rpx;
+  color: #444444;
+  line-height: 1.5;
+}
+
+/* 回复输入行 */
+.dp-reply-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16rpx;
+  padding-left: 60rpx;
+}
+
+.dp-reply-input {
+  flex: 1;
+  height: 72rpx;
+  line-height: 72rpx;
+  padding: 0 24rpx;
+  background: #f7f8fa;
+  border-radius: 36rpx;
+  font-size: 26rpx;
+  color: #333333;
+  box-sizing: border-box;
+  border: 2rpx solid transparent;
+  transition: all 0.2s;
+}
+
+.dp-reply-input:focus {
+  border-color: #ff7a3d;
+  background: #ffffff;
+}
+
+.dp-reply-btn {
+  padding: 0 32rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  font-size: 26rpx;
+  color: #999;
+  background: #f0f0f0;
+  border-radius: 36rpx;
+  flex-shrink: 0;
+  font-weight: 500;
+  transition: all 0.25s;
+}
+
+.dp-reply-btn--active {
+  color: #ffffff;
+  background: linear-gradient(135deg, #ff7a3d, #ff4d1a);
+  box-shadow: 0 4rpx 14rpx rgba(255,77,26,0.35);
+}
+
+/* 提问条 */
+.dp-qa-input-bar {
+  margin-top: 20rpx;
+  padding: 22rpx 26rpx;
+  background: linear-gradient(135deg, #fff8f5, #fff);
+  border-radius: 16rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 2rpx dashed #ffd4c4;
+}
+
+.dp-qa-ph {
+  flex: 1;
+  font-size: 26rpx;
+  color: #bbb;
+}
+
+.dp-qa-btn {
+  font-size: 28rpx;
+  color: #ff4d1a;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ff7a3d, #ff4d1a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── 评价 ── */
+.dp-write-review {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20rpx 0;
+  margin-bottom: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  gap: 16rpx;
+}
+
+.dp-write-avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #e0e0e0;
+}
+
+.dp-write-ph {
+  flex: 1;
+  font-size: 28rpx;
+  color: #bbbbbb;
+  padding: 0 16rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  background: #f8f8f8;
+  border-radius: 32rpx;
+}
+
+.dp-write-stars {
+  display: flex;
+  flex-direction: row;
+  gap: 4rpx;
+}
+
+.dp-write-star {
+  font-size: 30rpx;
+  color: #d8d8d8;
+}
+
+.dp-review {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.dp-review:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.dp-review:first-child {
+  padding-top: 0;
+}
+
+.dp-review-hd {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.dp-review-avatar {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+  background: #e0e0e0;
+}
+
+.dp-review-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-right: 10rpx;
+}
+
+.dp-review-lv {
+  font-size: 20rpx;
+  color: #c9a227;
+  border: 1rpx solid rgba(201, 162, 39, 0.4);
+  padding: 2rpx 8rpx;
+  border-radius: 4rpx;
+  margin-right: auto;
+}
+
+.dp-review-date {
+  font-size: 22rpx;
+  color: #bbbbbb;
+}
+
+.dp-review-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-bottom: 12rpx;
+}
+
+.dp-review-mood {
+  font-size: 22rpx;
+  color: #ff6633;
+  background: rgba(255, 102, 51, 0.08);
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+.dp-stars--sm {
+  margin-left: 4rpx;
+}
+
+.dp-review-badge {
+  font-size: 22rpx;
+  color: #aaaaaa;
+  margin-left: 8rpx;
+}
+
+.dp-review-txt {
+  font-size: 28rpx;
+  color: #444444;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  overflow: hidden;
+}
+
+.dp-review-pics {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+
+.dp-review-pic-wrap {
+  position: relative;
+  width: 196rpx;
+  height: 196rpx;
+}
+
+.dp-review-pic {
+  width: 196rpx;
+  height: 196rpx;
+  border-radius: 8rpx;
+  background: #e8e8e8;
+  display: block;
+}
+
+.dp-review-more {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8rpx;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+
+.dp-review-more-t {
+  font-size: 22rpx;
+  color: #ffffff;
+}
+
+.dp-review-help {
+  font-size: 22rpx;
+  color: #bbbbbb;
+  margin-top: 14rpx;
+  display: block;
+}
+
+.dp-review-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12rpx;
+}
+
+.dp-review-badge-owner {
+  font-size: 22rpx;
+  color: #aaaaaa;
+}
+
+.dp-review-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 20rpx;
+}
+
+.dp-review-action {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+/* ── 底部安全区 ── */
+.dp-safe-bottom {
+  height: calc(32rpx + env(safe-area-inset-bottom));
+}
+
+/* ── 空态 ── */
+.dp-empty {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+}
+
+.dp-empty-t {
+  font-size: 28rpx;
+  color: #999999;
+}
+
+/* ── 弹窗 ── */
+.dp-modal-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 900;
+}
+
+.dp-modal-box {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffffff;
+  border-radius: 24rpx 24rpx 0 0;
+  z-index: 901;
+  padding: 0 0 calc(40rpx + env(safe-area-inset-bottom));
+}
+
+.dp-ask-modal {
+  padding-top: 0;
+}
+
+.dp-review-modal {
+  padding-top: 0;
+}
+
+.dp-modal-head {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx 36rpx 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.dp-modal-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.dp-modal-close {
+  width: 60rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  font-size: 44rpx;
+  color: #999999;
+}
+
+.dp-ask-textarea {
+  margin: 24rpx 36rpx 0;
+  width: auto;
+  height: 220rpx;
+  padding: 20rpx;
+  background: #f8f8f8;
+  border-radius: 14rpx;
+  font-size: 30rpx;
+  color: #1a1a1a;
+  line-height: 1.5;
+  box-sizing: border-box;
+  border: none;
+  resize: none;
+}
+
+.dp-ask-tip {
+  margin: 12rpx 36rpx 0;
+  font-size: 24rpx;
+  color: #bbbbbb;
+  text-align: right;
+}
+
+.dp-modal-submit {
+  margin: 24rpx 36rpx 0;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #cccccc;
+  background: #f0f0f0;
+  border-radius: 44rpx;
+}
+
+.dp-modal-submit--active {
+  color: #ffffff;
+  background: linear-gradient(90deg, #ff8833, #ff5522);
+}
+
+/* 评价弹窗内容 */
+.dp-review-merchant {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 24rpx 36rpx 0;
+  gap: 16rpx;
+}
+
+.dp-review-merchant-img {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 10rpx;
+  background: #e8e8e8;
+}
+
+.dp-review-merchant-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.dp-score-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 24rpx 36rpx 0;
+  gap: 16rpx;
+}
+
+.dp-score-label {
+  font-size: 28rpx;
+  color: #666666;
+  flex-shrink: 0;
+}
+
+.dp-score-stars {
+  display: flex;
+  flex-direction: row;
+  gap: 6rpx;
+}
+
+.dp-score-star {
+  font-size: 48rpx;
+  color: #d8d8d8;
+  line-height: 1;
+}
+
+.dp-score-star--on {
+  color: #ff6633;
+}
+
+.dp-score-text {
+  font-size: 28rpx;
+  color: #ff6633;
+  font-weight: 600;
+}
+
+.dp-mood-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 20rpx 36rpx 0;
+  gap: 16rpx;
+}
+
+.dp-mood-list {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.dp-mood-tag {
+  font-size: 26rpx;
+  color: #888888;
+  padding: 8rpx 20rpx;
+  background: #f5f5f5;
+  border-radius: 999rpx;
+}
+
+.dp-mood-tag--on {
+  color: #ff6633;
+  background: rgba(255, 102, 51, 0.1);
+  border: 1rpx solid rgba(255, 102, 51, 0.3);
+}
+
+.dp-review-textarea {
+  margin: 20rpx 36rpx 0;
+  width: auto;
+  height: 200rpx;
+  padding: 20rpx;
+  background: #f8f8f8;
+  border-radius: 14rpx;
+  font-size: 30rpx;
+  color: #1a1a1a;
+  line-height: 1.5;
+  box-sizing: border-box;
+  border: none;
+  resize: none;
+}
+
+/* ── 底部安全区 ── */
+.dp-safe-bottom {
+  height: calc(32rpx + env(safe-area-inset-bottom));
+}
+
+/* ── 空态 ── */
+.dp-empty {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+}
+
+.dp-empty-t {
+  font-size: 28rpx;
+  color: #999999;
+}

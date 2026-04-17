@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "openapi": []
+  },
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  },
+  "externals": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

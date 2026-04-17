@@ -1,0 +1,101 @@
+<!-- 导游预定：天坛极顶 / 道境广场 -->
+<view class="spot-page" wx:if="{{spot}}">
+  <view class="spot-hero">
+    <image class="spot-hero-image" src="{{spot.image}}" mode="aspectFill" />
+    <view class="spot-hero-badges">
+      <text class="spot-badge spot-badge-green">{{spot.tags[0] || '讲解'}}</text>
+      <text class="spot-badge spot-badge-gold">金牌讲解</text>
+    </view>
+    <view class="spot-hero-overlay">
+      <text class="spot-hero-title {{spot.fontClass}}">{{spot.name}}</text>
+      <text class="spot-hero-subtitle">{{spot.subtitle}}</text>
+    </view>
+    <view class="spot-experience">{{spot.experienceCount}}人已体验</view>
+  </view>
+
+  <view class="spot-body">
+    <view class="spot-price-row">
+      <text class="spot-price">¥{{spot.price}}</text>
+      <text class="spot-price-unit">起</text>
+    </view>
+    <view class="spot-title-row">{{spot.name}} · 聆听王屋故事，赓续千年文脉</view>
+    <view class="spot-desc">{{spot.description}}</view>
+    <view class="spot-tags">
+      <text class="spot-tag" wx:for="{{spot.tags}}" wx:key="*this">{{item}}</text>
+    </view>
+
+    <view class="spot-section">
+      <view class="spot-section-title">选择票价 · 日期</view>
+      <view class="spot-date-tip">预约时选择具体日期</view>
+    </view>
+
+    <view class="spot-section">
+      <view class="spot-section-title">金牌说的与众不同</view>
+      <view class="spot-guides-desc">精挑细选、经验丰富，本地人深度讲解王屋山文化与景点故事。</view>
+      <view class="guide-grid">
+        <view
+          class="guide-card {{selectedGuideId === item.id ? 'guide-card-selected' : ''}}"
+          wx:for="{{guides}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="onSelectGuide"
+        >
+          <view class="guide-avatar">{{item.name[0]}}</view>
+          <text class="guide-name">{{item.name}}</text>
+          <text class="guide-title">{{item.title}}</text>
+          <text class="guide-intro">{{item.intro}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="spot-footer">
+      <text class="spot-price">{{selectedGuide ? '¥' + spot.price + '起' : '请先选择导游'}}</text>
+      <button class="spot-book-btn" bindtap="onBookTap">预约导游</button>
+    </view>
+  </view>
+</view>
+
+<!-- 导游预约弹窗 -->
+<view class="book-mask" wx:if="{{showBookModal}}" catchtap="closeBookModal">
+  <view class="book-modal" catchtap="preventClose">
+    <view class="book-modal-title">预约导游 · {{selectedGuide.name}}</view>
+    <view class="book-modal-subtitle" wx:if="{{selectedGuide}}">{{selectedGuide.title}} · {{spot.name}}</view>
+    <view class="book-form">
+      <view class="book-row">
+        <text class="book-label">预约日期</text>
+        <picker mode="date" value="{{bookDate}}" start="{{today}}" bindchange="onDateChange">
+          <view class="book-value">{{bookDate || '请选择日期'}}</view>
+        </picker>
+      </view>
+      <view class="book-row">
+        <text class="book-label">人数</text>
+        <picker mode="selector" range="{{[1,2,3,4,5,6,7,8,9,10]}}" value="{{bookCount - 1}}" bindchange="onCountChange">
+          <view class="book-value">{{bookCount}}人</view>
+        </picker>
+      </view>
+      <view class="book-row">
+        <text class="book-label">姓名</text>
+        <input class="book-input" placeholder="请输入姓名" value="{{bookName}}" bindinput="onNameInput" />
+      </view>
+      <view class="book-row">
+        <text class="book-label">手机号</text>
+        <input class="book-input" type="number" maxlength="11" placeholder="请输入手机号" value="{{bookPhone}}" bindinput="onPhoneInput" />
+      </view>
+      <view class="book-agree">
+        <checkbox-group bindchange="onBookAgreeChange">
+          <label class="book-agree-label">
+            <checkbox value="1" checked="{{bookAgreed}}" color="#1e5ea6" />
+            <text class="book-agree-text">我已阅读并同意</text>
+            <navigator class="book-agree-link" url="/pages/user-agreement/user-agreement">《用户服务协议》</navigator>
+            <text class="book-agree-text">和</text>
+            <navigator class="book-agree-link" url="/pages/privacy/privacy">《隐私政策》</navigator>
+          </label>
+        </checkbox-group>
+      </view>
+    </view>
+    <view class="book-actions">
+      <button class="book-cancel" catchtap="closeBookModal">取消</button>
+      <button class="book-submit" catchtap="submitBooking">确认预约导游</button>
+    </view>
+  </view>
+</view>

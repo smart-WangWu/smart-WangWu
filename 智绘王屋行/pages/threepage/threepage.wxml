@@ -1,0 +1,113 @@
+<!-- 攻略页：风景与地理位置、旅行路线、美食民宿推荐、预算问答 -->
+<scroll-view scroll-y="true" class="guide-scroll">
+  <view class="guide-page">
+
+    <!-- 风景与地理位置 -->
+    <view class="guide-section intro-section">
+      <view class="section-header">
+        <text class="section-title">风景与地理位置</text>
+        <text class="section-subtitle">王屋山位于河南省济源市，属太行山脉东延，主峰天坛山海拔1715米</text>
+      </view>
+      <view class="intro-card">
+        <image src="https://gitee.com/ty-4895/picture/raw/master/20250822142555711.jpg" class="intro-image" mode="aspectFill"></image>
+        <view class="intro-content">
+          <text class="intro-text">王屋山为道教圣地，轩辕黄帝曾在此设坛祭天。山体雄奇、植被丰茂，李白、杜甫曾游历并留《上阳台帖》等文化遗迹，是愚公移山故事发源地。景区含道境广场、愚公移山群雕、阳台宫、天坛极顶等精华景点，四季皆可畅游。</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 旅游路线推荐 -->
+    <view class="guide-section routes-section">
+      <view class="section-header routes-header">
+        <text class="section-title routes-title">旅游路线推荐</text>
+        <text class="section-subtitle">精选路线，畅游王屋</text>
+      </view>
+      <scroll-view scroll-x="true" class="routes-scroll" enhanced show-scrollbar="{{false}}">
+        <view class="routes-row">
+          <view class="route-card" wx:for="{{routeList}}" wx:key="id">
+            <view class="route-badge">{{item.badge}}</view>
+            <view class="route-image-wrap">
+              <image src="{{item.image}}" class="route-image" mode="aspectFill"></image>
+              <view class="route-overlay">
+                <text class="route-overlay-time">🕐 {{item.durationShort}}</text>
+                <text class="route-overlay-diff">🚶 {{item.difficultyShort}}</text>
+              </view>
+            </view>
+            <view class="route-body">
+              <text class="route-title">{{item.title}}</text>
+              <text class="route-desc">{{item.stops}}</text>
+              <view class="route-footer">
+                <text class="route-footer-time">🕐 全程约{{item.duration}}</text>
+                <text class="route-footer-diff">徒步难度：{{item.difficultyStars}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 美食与民宿推荐 -->
+    <view class="guide-section recommend-section">
+      <view class="section-header">
+        <text class="section-title">美食与民宿推荐</text>
+        <text class="section-subtitle">吃住无忧，玩转王屋</text>
+      </view>
+      <view class="recommend-tabs">
+        <text class="recommend-tab {{recommendActive === 'food' ? 'active' : ''}}" bindtap="setRecommendActive" data-type="food">美食</text>
+        <text class="recommend-tab {{recommendActive === 'homestay' ? 'active' : ''}}" bindtap="setRecommendActive" data-type="homestay">民宿</text>
+      </view>
+      <view class="recommend-list" wx:if="{{recommendActive === 'food'}}">
+        <view class="recommend-item" wx:for="{{foodRecommend}}" wx:key="id" bindtap="goFood" data-item="{{item}}">
+          <image src="{{item.image}}" class="recommend-thumb" mode="aspectFill"></image>
+          <view class="recommend-info">
+            <text class="recommend-name">{{item.name}}</text>
+            <text class="recommend-desc">{{item.desc}}</text>
+            <text class="recommend-tag">¥{{item.price}}起</text>
+          </view>
+        </view>
+      </view>
+      <view class="recommend-list" wx:if="{{recommendActive === 'homestay'}}">
+        <view class="recommend-item" wx:for="{{homestayRecommend}}" wx:key="id" bindtap="goHomestay" data-item="{{item}}">
+          <image src="{{item.image}}" class="recommend-thumb" mode="aspectFill"></image>
+          <view class="recommend-info">
+            <text class="recommend-name">{{item.name}}</text>
+            <text class="recommend-desc">{{item.desc}}</text>
+            <text class="recommend-tag">¥{{item.price}}/晚起</text>
+          </view>
+        </view>
+      </view>
+      <view class="recommend-more">
+        <navigator url="/pages/fourpage/fourpage" class="more-link" wx:if="{{recommendActive === 'food'}}">查看更多美食 →</navigator>
+        <navigator url="/pages/twopage/twopage" class="more-link" wx:if="{{recommendActive === 'homestay'}}">查看更多民宿 →</navigator>
+      </view>
+    </view>
+
+    <!-- 预算问答 -->
+    <view class="guide-section qa-section">
+      <view class="section-header qa-header">
+        <text class="section-title">预算问答</text>
+        <text class="section-subtitle">常见花费参考，点击展开查看</text>
+      </view>
+      <view class="qa-list">
+        <view class="qa-item {{item.open ? 'open' : ''}}" wx:for="{{budgetQA}}" wx:key="id" bindtap="toggleQA" data-index="{{index}}">
+          <view class="qa-question">
+            <view class="qa-q-left">
+              <text class="qa-q-num">Q{{index + 1}}</text>
+              <text class="qa-q-text">{{item.question}}</text>
+            </view>
+            <view class="qa-arrow-wrap">
+              <text class="qa-arrow">{{item.open ? '−' : '+'}}</text>
+            </view>
+          </view>
+          <view class="qa-answer-wrap" wx:if="{{item.open}}">
+            <view class="qa-answer">
+              <text class="qa-a-text">{{item.answer}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="guide-bottom-spacer"></view>
+  </view>
+</scroll-view>

@@ -1,0 +1,200 @@
+/* 全局样式：清新基调 */
+page {
+  font-family: "PingFang SC", "Helvetica Neue", sans-serif;
+  background-color: #f0f7ff; /* 更明显的浅蓝背景 */
+  color: #444;
+  padding: 20rpx;
+}
+
+/* 卡片通用样式：轻量化阴影+圆角 */
+.card-section {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 36rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(41, 103, 173, 0.08); /* 深蓝阴影 */
+}
+
+/* 头部样式：分散布局，避免文字堆叠 */
+.header {
+  margin-right: 32rpx; 
+  display: flex;
+  align-items: flex-start;
+  padding: 10rpx 0 30rpx;
+  margin-bottom: 20rpx;
+}
+.header-logo {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 12rpx;
+  margin-right: 28rpx;
+  flex-shrink: 0; /* 防止Logo被压缩 */
+}
+.header-content {
+  flex: 1;
+  padding-top: 10rpx;
+}
+.main-title {
+  font-size: 52rpx;
+  font-weight: 600;
+  color: #1e5ea6; /* 更深的主题蓝 */
+  display: block;
+  margin-bottom: 12rpx;
+  line-height: 1.2;
+}
+.sub-title {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 30rpx;
+  color: #3a7bb8; /* 更深的浅蓝副标题 */
+  display: block;
+  margin-bottom: 16rpx;
+}
+.desc {
+  margin-right: 32rpx; 
+  border-right: 10rpx;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.7;
+  letter-spacing: 0.5rpx; /* 增加字间距，避免拥挤 */
+}
+
+/* 区块标题：统一风格 */
+.section-title {
+  font-size: 36rpx;
+  color: #1e5ea6; /* 更深的蓝色 */
+  font-weight: 500;
+  display: block;
+  margin-bottom: 28rpx;
+  padding-left: 12rpx;
+  border-left: 6rpx solid #4a90e2; /* 更亮的蓝色装饰条 */
+}
+
+/* 导师信息区：网格布局，分散排列 */
+.teacher-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 两列布局，避免单行拥挤 */
+  gap: 24rpx;
+}
+/* 适配小屏：单列显示 */
+@media (max-width: 375px) {
+  .teacher-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.teacher-item {
+  background: #f5f9ff; /* 更明显的淡蓝背景 */
+  border-radius: 12rpx;
+  padding: 24rpx;
+}
+.teacher-role {
+  font-size: 26rpx;
+  color: #3a7bb8; /* 更深的蓝色 */
+  display: block;
+  margin-bottom: 8rpx;
+}
+.teacher-name {
+  font-size: 32rpx;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 12rpx;
+}
+.teacher-info {
+  font-size: 24rpx;
+  color: #777;
+  line-height: 1.6;
+}
+
+/* 团队分组区：标签式设计，强化区分 */
+.team-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+.team-group {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 0;
+}
+.group-tag {
+  background: #e3efff; /* 更深的淡蓝标签 */
+  color: #1e5ea6; /* 更深的蓝色 */
+  font-size: 28rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 60rpx; /* 胶囊形标签 */
+  margin-right: 20rpx;
+  white-space: nowrap; /* 防止标签换行 */
+}
+.group-members {
+  font-size: 28rpx;
+  color: #555;
+  line-height: 1.6;
+  flex: 1; /* 成员列表占满剩余空间 */
+}
+
+/* 关注我们：抖音 / 小红书 / 视频号 */
+.social-desc {
+  display: block;
+  font-size: 26rpx;
+  color: #888;
+  margin-top: -16rpx;
+  margin-bottom: 28rpx;
+  padding-left: 12rpx;
+}
+.social-list {
+  display: flex;
+  justify-content: space-between;
+  gap: 24rpx;
+  flex-wrap: wrap;
+}
+.social-item {
+  flex: 1;
+  min-width: 200rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8fbfe;
+  border-radius: 16rpx;
+  padding: 28rpx 20rpx;
+  border-left: 6rpx solid #4a90e2;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+.social-item-douyin { border-left-color: #FE2C55; }
+.social-item-xhs    { border-left-color: #FF2442; }
+.social-item-video { border-left-color: #07C160; }
+.social-icon-wrap {
+  width: 112rpx;
+  height: 112rpx;
+  border-radius: 24rpx;
+  overflow: hidden;
+  margin-bottom: 16rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.06);
+}
+.social-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.social-name {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 6rpx;
+}
+.social-hint {
+  font-size: 22rpx;
+  color: #999;
+}
+.social-item-hover {
+  transform: translateY(-4rpx);
+  box-shadow: 0 8rpx 24rpx rgba(41, 103, 173, 0.12);
+}
+.social-item-hover .social-icon-wrap {
+  box-shadow: 0 6rpx 16rpx rgba(0,0,0,0.1);
+}
+.social-item-hover .social-name { color: #1e5ea6; }
+.social-item-douyin.social-item-hover .social-name { color: #FE2C55; }
+.social-item-xhs.social-item-hover .social-name    { color: #FF2442; }
+.social-item-video.social-item-hover .social-name { color: #07C160; }

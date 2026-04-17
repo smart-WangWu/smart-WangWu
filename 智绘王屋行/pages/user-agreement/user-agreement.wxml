@@ -1,0 +1,28 @@
+<view class="agreement-page">
+  <view class="agreement-content">
+    <view class="agreement-section">
+      <text class="agreement-title">智绘王屋行 用户服务协议</text>
+      <text class="agreement-update">更新日期：2025年3月</text>
+    </view>
+
+    <view class="agreement-section">
+      <text class="section-title">一、服务说明</text>
+      <text class="section-text">智绘王屋行小程序由运营方提供，旨在为游客提供王屋山景区导览、民宿预订、导游预约、资讯查询等服务。使用本小程序即表示您同意本协议及《隐私政策》。</text>
+    </view>
+
+    <view class="agreement-section">
+      <text class="section-title">二、用户信息收集与使用</text>
+      <text class="section-text">为完成民宿预订、导游预约等订单服务，我们可能收集您主动填写的姓名、手机号等信息。收集目的：用于订单联系、确认与售后服务。收集方式：您在本小程序内相关表单中主动填写。使用与存储：仅用于该订单的沟通与履约，我们会采取合理措施保护您的个人信息。具体规则以《隐私政策》为准。</text>
+    </view>
+
+    <view class="agreement-section">
+      <text class="section-title">三、用户义务</text>
+      <text class="section-text">您应保证所填写的手机号等联系方式真实、有效；不得利用本服务从事违法违规活动。因您提供虚假信息或违规使用导致的后果由您自行承担。</text>
+    </view>
+
+    <view class="agreement-section">
+      <text class="section-title">四、协议更新与联系我们</text>
+      <text class="section-text">我们可能适时修订本协议，修订后将通过小程序内公示等方式通知。如您对本协议有疑问，可通过「联系客服」或电话 17839229410 与我们联系。</text>
+    </view>
+  </view>
+</view>

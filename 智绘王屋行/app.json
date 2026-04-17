@@ -1,0 +1,80 @@
+{
+  "networkTimeout": { "request": 30000, "uploadFile": 30000 },
+  "pages": [
+    "pages/home/home",
+    "pages/ai/ai",
+    "pages/spot-detail/spot-detail",
+    "pages/index/index",
+    "pages/contact/contact",
+    "pages/onepage/onepage",
+    "pages/twopage/twopage",
+    "pages/threepage/threepage",
+    "pages/fourpage/fourpage",
+    "pages/restaurant-detail/index",
+    "pages/homestay-detail/index",
+    "pages/tuiwen1/tuiwen1",
+    "pages/tuiwen2/tuiwen2",
+    "pages/tuiwen3/tuiwen3",
+    "pages/tuiwen4/tuiwen4",
+    "pages/tuiwen5/tuiwen5",
+    "pages/tuiwen6/tuiwen6",
+    "pages/sss/sss",
+    "pages/ss/ss",
+    "pages/s/s",
+    "pages/new/new",
+    "pages/new1/new1",
+    "pages/homestay-order/homestay-order",
+    "pages/retail-order/retail-order",
+    "pages/my-like/my-like",
+    "pages/my-comment/my-comment",
+    "pages/my-follow/my-follow",
+    "pages/re-review/index",
+    "pages/companion/companion",
+    "pages/companion-detail/companion-detail",
+    "pages/about/about",
+    "pages/privacy/privacy",
+    "pages/user-agreement/user-agreement"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "/images/shouye.jpg",
+        "selectedIconPath": "/images/shouye.jpg"
+      },
+      {
+        "pagePath": "pages/ai/ai",
+        "text": "AI",
+        "iconPath": "/images/Ai形象.png",
+        "selectedIconPath": "/images/Ai形象.png"
+      },
+      {
+        "pagePath": "pages/contact/contact",
+        "text": "榜单",
+        "iconPath": "/images/bangdan.png",
+        "selectedIconPath": "/images/bangdan.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "我的",
+        "iconPath": "/images/wode.jpg",
+        "selectedIconPath": "/images/wode.jpg"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于展示天气、附近景点等"
+    }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "requiredPrivateInfos": ["getLocation"]
+}

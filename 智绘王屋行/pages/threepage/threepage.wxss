@@ -1,0 +1,371 @@
+/* 攻略页通用 */
+.guide-scroll {
+  height: 100vh;
+  background: #f5f5f5;
+}
+
+.guide-page {
+  padding-top: 24rpx;
+  padding-bottom: 40rpx;
+}
+
+.guide-bottom-spacer {
+  height: 60rpx;
+}
+
+.guide-section {
+  margin-bottom: 32rpx;
+  background: #fff;
+  padding: 32rpx 24rpx 40rpx;
+  border-radius: 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 28rpx;
+}
+
+.section-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #1a5c2e;
+  margin-bottom: 12rpx;
+}
+
+.section-subtitle {
+  display: block;
+  font-size: 26rpx;
+  color: #888;
+}
+
+/* 风景与地理位置 */
+.intro-section .intro-card {
+  border-radius: 16rpx;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.06);
+}
+
+.intro-image {
+  width: 100%;
+  height: 320rpx;
+  display: block;
+}
+
+.intro-content {
+  padding: 24rpx 20rpx;
+}
+
+.intro-text {
+  font-size: 28rpx;
+  line-height: 1.85;
+  color: #444;
+  text-align: justify;
+}
+
+/* 旅游路线推荐 */
+.routes-section {
+  padding-bottom: 24rpx;
+}
+
+.routes-header .section-title {
+  font-size: 38rpx;
+  color: #1a5c2e;
+}
+
+.routes-scroll {
+  white-space: nowrap;
+  width: 100%;
+}
+
+.routes-row {
+  display: inline-flex;
+  gap: 24rpx;
+  padding: 0 8rpx 16rpx;
+}
+
+.route-card {
+  position: relative;
+  display: inline-block;
+  width: 520rpx;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 28rpx rgba(0,0,0,0.08);
+  vertical-align: top;
+}
+
+.route-badge {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  z-index: 2;
+  background: #1a5c2e;
+  color: #fff;
+  font-size: 22rpx;
+  padding: 8rpx 18rpx;
+  border-radius: 20rpx;
+}
+
+.route-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 280rpx;
+  overflow: hidden;
+}
+
+.route-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.route-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 20rpx;
+  background: linear-gradient(transparent, rgba(0,0,0,0.5));
+  color: #fff;
+  font-size: 24rpx;
+}
+
+.route-overlay-time,
+.route-overlay-diff {
+  opacity: 0.95;
+}
+
+.route-body {
+  padding: 20rpx 20rpx 24rpx;
+}
+
+.route-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.route-desc {
+  display: block;
+  font-size: 22rpx;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 14rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+.route-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 22rpx;
+  color: #888;
+}
+
+.route-footer-time,
+.route-footer-diff {
+  flex: 1;
+}
+
+.route-footer-diff {
+  text-align: right;
+}
+
+/* 美食与民宿推荐 */
+.recommend-tabs {
+  display: flex;
+  gap: 24rpx;
+  margin-bottom: 24rpx;
+  padding: 0 8rpx;
+}
+
+.recommend-tab {
+  font-size: 28rpx;
+  color: #666;
+  padding: 12rpx 28rpx;
+  border-radius: 28rpx;
+  background: #f0f0f0;
+}
+
+.recommend-tab.active {
+  background: #1a5c2e;
+  color: #fff;
+  font-weight: 500;
+}
+
+.recommend-list {
+  margin-bottom: 20rpx;
+}
+
+.recommend-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
+}
+
+.recommend-item:last-child {
+  border-bottom: none;
+}
+
+.recommend-thumb {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+  margin-right: 24rpx;
+}
+
+.recommend-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.recommend-name {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.recommend-desc {
+  display: block;
+  font-size: 24rpx;
+  color: #888;
+  margin-bottom: 6rpx;
+}
+
+.recommend-tag {
+  font-size: 24rpx;
+  color: #1a5c2e;
+  font-weight: 500;
+}
+
+.recommend-more {
+  margin-top: 16rpx;
+  text-align: center;
+}
+
+.more-link {
+  font-size: 26rpx;
+  color: #1a5c2e;
+}
+
+/* 预算问答 */
+.qa-section {
+  padding: 32rpx 24rpx 48rpx;
+}
+
+.qa-header .section-subtitle {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.qa-list {
+  margin-top: 16rpx;
+}
+
+.qa-item {
+  margin-bottom: 20rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.06);
+  border-left: 6rpx solid #D4A574;
+}
+
+.qa-item:last-child {
+  margin-bottom: 0;
+}
+
+.qa-item.open {
+  box-shadow: 0 8rpx 28rpx rgba(212, 165, 116, 0.15);
+  border-left-color: #b8926a;
+}
+
+.qa-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32rpx 28rpx;
+  min-height: 48rpx;
+}
+
+.qa-q-left {
+  flex: 1;
+  min-width: 0;
+  padding-right: 20rpx;
+}
+
+.qa-q-num {
+  display: inline-block;
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #D4A574;
+  background: rgba(212, 165, 116, 0.15);
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  margin-right: 16rpx;
+  vertical-align: middle;
+}
+
+.qa-q-text {
+  font-size: 29rpx;
+  color: #333;
+  font-weight: 500;
+  line-height: 1.45;
+  vertical-align: middle;
+}
+
+.qa-arrow-wrap {
+  flex-shrink: 0;
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: rgba(212, 165, 116, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qa-item.open .qa-arrow-wrap {
+  background: rgba(212, 165, 116, 0.3);
+}
+
+.qa-arrow {
+  font-size: 36rpx;
+  font-weight: 300;
+  color: #b8926a;
+  line-height: 1;
+}
+
+.qa-answer-wrap {
+  padding: 0 28rpx 28rpx;
+}
+
+.qa-answer {
+  padding: 24rpx 24rpx 28rpx;
+  background: linear-gradient(135deg, rgba(212, 165, 116, 0.08) 0%, rgba(212, 165, 116, 0.04) 100%);
+  border-radius: 16rpx;
+}
+
+.qa-a-text {
+  font-size: 27rpx;
+  color: #555;
+  line-height: 1.85;
+  letter-spacing: 0.5rpx;
+}

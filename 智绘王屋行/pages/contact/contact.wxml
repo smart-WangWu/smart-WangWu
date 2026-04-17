@@ -1,0 +1,206 @@
+<!-- 榜单页 pages/contact/contact.wxml -->
+<view class="rank-page">
+
+  <!-- ══════════════════════════════
+       顶部 Tab + 山野装饰
+       ══════════════════════════════ -->
+  <view class="rank-header">
+    <!-- 顶部标签区 -->
+    <view class="rank-tabs">
+      <view
+        class="rank-tab rank-tab--food {{activeTab === 'food' ? 'active' : ''}}"
+        data-tab="food"
+        bindtap="switchTab"
+      >
+        <text class="rank-tab-icon">🍜</text>
+        <text class="rank-tab-text">美食榜</text>
+      </view>
+      <view
+        class="rank-tab rank-tab--homestay {{activeTab === 'homestay' ? 'active' : ''}}"
+        data-tab="homestay"
+        bindtap="switchTab"
+      >
+        <text class="rank-tab-icon">🏡</text>
+        <text class="rank-tab-text">民宿榜</text>
+      </view>
+    </view>
+    <!-- 排名说明 -->
+    <view class="rank-note">
+      <text class="rank-note-icon">🏔️</text>
+      <text class="rank-note-text">王屋山景区官方榜单 · 按综合评分排序</text>
+    </view>
+  </view>
+
+  <!-- ══════════════════════════════
+       美食榜列表（条件渲染 + 动画）
+       ══════════════════════════════ -->
+  <view class="rank-content {{activeTab === 'food' ? 'show' : 'hide'}}">
+    <view class="rank-block rank-block--food">
+      <!-- 冠军横幅 -->
+      <view
+        class="rank-champion"
+        bindtap="goFoodDetail"
+        data-id="{{foodRanking[0].id}}"
+        wx:if="{{foodRanking.length > 0}}"
+      >
+        <view class="champion-crown">👑</view>
+        <image class="champion-img" src="{{foodRanking[0].imageUrl}}" mode="aspectFill" />
+        <view class="champion-info">
+          <view class="champion-tag-row">
+            <text class="champion-tag champion-tag--gold">🏆 人气王</text>
+            <text class="champion-rank-label">第1名</text>
+          </view>
+          <text class="champion-name">{{foodRanking[0].nameShort}}</text>
+          <text class="champion-addr">{{foodRanking[0].addressShort}}</text>
+          <view class="champion-score">
+            <text class="champion-star">★</text>
+            <text class="champion-rating">{{foodRanking[0].ratingStr}}</text>
+            <text class="champion-exp">{{foodRanking[0].experienceCount}}人体验</text>
+          </view>
+        </view>
+        <view class="champion-arrow">›</view>
+      </view>
+
+      <!-- TOP 2-5 列表 -->
+      <view class="rank-list" wx:if="{{foodRanking.length > 1}}">
+        <view
+          class="rank-item rank-item--food rank-item--{{item.rank <= 3 ? 'top' + item.rank : 'normal'}}"
+          wx:for="{{foodRanking}}"
+          wx:if="{{item.rank > 1}}"
+          wx:key="id"
+        >
+          <!-- 排名徽章 -->
+          <view class="rank-medal-wrap rank-medal-wrap--food rank-medal-wrap--{{item.rank <= 3 ? 'top' : 'n'}}">
+            <text class="rank-medal" wx:if="{{item.rank <= 3}}">{{item.medal}}</text>
+            <text class="rank-num-text" wx:else>{{item.rank}}</text>
+          </view>
+
+          <!-- 封面图 -->
+          <image
+            class="rank-img"
+            src="{{item.imageUrl}}"
+            mode="aspectFill"
+            bindtap="goFoodDetail"
+            data-id="{{item.id}}"
+          />
+
+          <!-- 信息区 -->
+          <view class="rank-info">
+            <view class="rank-name-row">
+              <text class="rank-name">{{item.nameShort}}</text>
+              <text class="rank-tag rank-tag--gold" wx:if="{{item.rank === 2}}">口碑优选</text>
+              <text class="rank-tag rank-tag--silver" wx:elif="{{item.rank === 3}}">精选推荐</text>
+            </view>
+            <text class="rank-addr">{{item.addressShort}}</text>
+            <view class="rank-score-row">
+              <text class="rank-star">★</text>
+              <text class="rank-rating rank-rating--food">{{item.ratingStr}}</text>
+              <view class="rank-bar-wrap">
+                <view class="rank-bar rank-bar--food" style="width: {{item.barWidth}}%"></view>
+              </view>
+            </view>
+          </view>
+
+          <!-- 体验按钮 -->
+          <view
+            class="rank-exp-btn rank-exp-btn--food"
+            data-tab="food"
+            data-id="{{item.id}}"
+            bindtap="onExperience"
+          >
+            <text class="rank-exp-icon">💫</text>
+            <text class="rank-exp-num">{{item.experienceCount}}</text>
+            <text class="rank-exp-label">体验</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ══════════════════════════════
+       民宿榜列表（条件渲染 + 动画）
+       ══════════════════════════════ -->
+  <view class="rank-content {{activeTab === 'homestay' ? 'show' : 'hide'}}">
+    <view class="rank-block rank-block--homestay">
+      <!-- 冠军横幅 -->
+      <view
+        class="rank-champion"
+        bindtap="goHomestayDetail"
+        data-id="{{homestayRanking[0].id}}"
+        wx:if="{{homestayRanking.length > 0}}"
+      >
+        <view class="champion-crown">👑</view>
+        <image class="champion-img" src="{{homestayRanking[0].imageUrl}}" mode="aspectFill" />
+        <view class="champion-info">
+          <view class="champion-tag-row">
+            <text class="champion-tag champion-tag--green">🏆 人气王</text>
+            <text class="champion-rank-label">第1名</text>
+          </view>
+          <text class="champion-name">{{homestayRanking[0].nameShort}}</text>
+          <text class="champion-addr">{{homestayRanking[0].addressShort}}</text>
+          <view class="champion-score">
+            <text class="champion-star">★</text>
+            <text class="champion-rating champion-rating--green">{{homestayRanking[0].ratingStr}}</text>
+            <text class="champion-exp">{{homestayRanking[0].experienceCount}}人体验</text>
+          </view>
+        </view>
+        <view class="champion-arrow">›</view>
+      </view>
+
+      <!-- TOP 2-5 列表 -->
+      <view class="rank-list" wx:if="{{homestayRanking.length > 1}}">
+        <view
+          class="rank-item rank-item--homestay rank-item--{{item.rank <= 3 ? 'top' + item.rank : 'normal'}}"
+          wx:for="{{homestayRanking}}"
+          wx:if="{{item.rank > 1}}"
+          wx:key="id"
+        >
+          <!-- 排名徽章 -->
+          <view class="rank-medal-wrap rank-medal-wrap--homestay rank-medal-wrap--{{item.rank <= 3 ? 'top' : 'n'}}">
+            <text class="rank-medal" wx:if="{{item.rank <= 3}}">{{item.medal}}</text>
+            <text class="rank-num-text" wx:else>{{item.rank}}</text>
+          </view>
+
+          <!-- 封面图 -->
+          <image
+            class="rank-img"
+            src="{{item.imageUrl}}"
+            mode="aspectFill"
+            bindtap="goHomestayDetail"
+            data-id="{{item.id}}"
+          />
+
+          <!-- 信息区 -->
+          <view class="rank-info">
+            <view class="rank-name-row">
+              <text class="rank-name">{{item.nameShort}}</text>
+              <text class="rank-tag rank-tag--green" wx:if="{{item.rank === 2}}">口碑优选</text>
+              <text class="rank-tag rank-tag--green-light" wx:elif="{{item.rank === 3}}">精选推荐</text>
+            </view>
+            <text class="rank-addr">{{item.addressShort}}</text>
+            <view class="rank-score-row">
+              <text class="rank-star rank-star--homestay">★</text>
+              <text class="rank-rating rank-rating--homestay">{{item.ratingStr}}</text>
+              <view class="rank-bar-wrap">
+                <view class="rank-bar rank-bar--homestay" style="width: {{item.barWidth}}%"></view>
+              </view>
+            </view>
+          </view>
+
+          <!-- 体验按钮 -->
+          <view
+            class="rank-exp-btn rank-exp-btn--homestay"
+            data-tab="homestay"
+            data-id="{{item.id}}"
+            bindtap="onExperience"
+          >
+            <text class="rank-exp-icon">💫</text>
+            <text class="rank-exp-num">{{item.experienceCount}}</text>
+            <text class="rank-exp-label">体验</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

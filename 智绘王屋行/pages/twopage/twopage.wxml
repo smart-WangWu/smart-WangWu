@@ -1,0 +1,165 @@
+<!-- 民宿列表页面 -->
+<view class="minsu-page">
+  <view class="page-header">
+    <text class="page-title">精选民宿</text>
+    <text class="page-desc">王屋山周边 · 安心入住</text>
+  </view>
+
+  <view class="shop-list" wx:if="{{shopList.length > 0}}">
+    <navigator
+      class="shop-item-horizontal"
+      url="/pages/homestay-detail/index?id={{item.id}}"
+      wx:for="{{shopList}}"
+      wx:key="id"
+    >
+      <image class="shop-item-img" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="shop-item-content">
+        <view class="shop-item-header">
+          <text class="shop-item-name">{{item.name}}</text>
+          <view class="shop-item-tag">{{item.type}}</view>
+        </view>
+        <text class="shop-item-reason">{{item.reason}}</text>
+        <text class="shop-item-address">{{item.address}}</text>
+        <view class="shop-item-footer">
+          <text class="shop-item-price">¥{{item.price}}<text class="shop-item-unit">/晚起</text></text>
+          <button class="shop-item-btn" catchtap="showBookForm" data-index="{{index}}">扫码预定</button>
+        </view>
+      </view>
+    </navigator>
+  </view>
+
+  <view class="shop-empty" wx:if="{{shopList.length === 0 && !loading}}">
+    <text class="empty-text">暂无民宿数据</text>
+  </view>
+</view>
+
+<!-- 预订表单弹窗 -->
+<view class="form-modal" wx:if="{{showBookModal}}" catchtap="hideBookModal">
+  <view class="form-container" catchtap="preventClose">
+    <view class="form-header">
+      <text class="form-title">预订 · {{currentHotel.name}}</text>
+      <view class="close-btn" bindtap="hideBookModal">×</view>
+    </view>
+
+    <scroll-view class="form-content" scroll-y enhanced show-scrollbar="{{false}}">
+      <view class="form-section">
+        <text class="form-section-title">基本信息</text>
+        <view class="form-item">
+          <text class="form-label">姓名</text>
+          <input class="form-input" placeholder="请输入姓名" value="{{formData.name}}" bindinput="onNameInput" />
+        </view>
+        <view class="form-item">
+          <text class="form-label">手机号</text>
+          <input class="form-input" type="number" maxlength="11" placeholder="请输入手机号" value="{{formData.phone}}" bindinput="onPhoneInput" />
+        </view>
+      </view>
+
+      <view class="form-section">
+        <text class="form-section-title">入住信息</text>
+        <view class="form-item">
+          <text class="form-label">房型</text>
+          <view class="radio-group">
+            <label class="radio-item" wx:for="{{roomTypes}}" wx:key="value">
+              <radio value="{{item.value}}" checked="{{formData.roomType === item.value}}" bindtap="onRoomTypeChange" data-value="{{item.value}}" color="#1e5ea6" />
+              <text class="radio-text">{{item.name}}</text>
+            </label>
+          </view>
+        </view>
+        <view class="form-item">
+          <text class="form-label">房间数</text>
+          <view class="number-stepper">
+            <view class="stepper-btn" bindtap="decreaseQuantity">－</view>
+            <text class="stepper-number">{{formData.quantity}}</text>
+            <view class="stepper-btn" bindtap="increaseQuantity">＋</view>
+          </view>
+        </view>
+        <view class="form-item form-item-picker">
+          <text class="form-label">入住日期</text>
+          <picker mode="date" value="{{formData.checkInDate}}" bindchange="onCheckInDateChange">
+            <view class="picker {{formData.checkInDate ? '' : 'picker-placeholder'}}">{{formData.checkInDate || '请选择入住日期'}}<text class="picker-arrow">›</text></view>
+          </picker>
+        </view>
+        <view class="form-item form-item-picker">
+          <text class="form-label">退房日期</text>
+          <picker mode="date" value="{{formData.checkOutDate}}" bindchange="onCheckOutDateChange">
+            <view class="picker {{formData.checkOutDate ? '' : 'picker-placeholder'}}">{{formData.checkOutDate || '请选择退房日期'}}<text class="picker-arrow">›</text></view>
+          </picker>
+        </view>
+      </view>
+
+      <view class="form-section">
+        <text class="form-section-title">其他需求</text>
+        <view class="form-item">
+          <text class="form-label">餐饮</text>
+          <checkbox-group bindchange="onMealChange">
+            <view class="checkbox-row">
+              <label class="checkbox-item" wx:for="{{mealOptions}}" wx:key="value">
+                <checkbox value="{{item.value}}" checked="{{formData.meals.indexOf(item.value) !== -1}}" color="#1e5ea6" />
+                <text class="checkbox-text">{{item.name}}</text>
+              </label>
+            </view>
+          </checkbox-group>
+        </view>
+        <view class="form-item">
+          <text class="form-label">忌口说明</text>
+          <textarea class="form-textarea" placeholder="选填，如：不吃辣、素食" value="{{formData.dietaryRequirements}}" bindinput="onDietaryInput" />
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="form-agree">
+      <checkbox-group bindchange="onFormAgreeChange">
+        <label class="form-agree-label">
+          <checkbox value="1" checked="{{formAgreed}}" color="#1e5ea6" />
+          <text class="form-agree-text">我已阅读并同意</text>
+          <navigator class="form-agree-link" url="/pages/user-agreement/user-agreement">《用户服务协议》</navigator>
+          <text class="form-agree-text">和</text>
+          <navigator class="form-agree-link" url="/pages/privacy/privacy">《隐私政策》</navigator>
+        </label>
+      </checkbox-group>
+    </view>
+
+    <view class="form-actions">
+      <button class="submit-btn" bindtap="submitBooking">确认预订</button>
+    </view>
+  </view>
+</view>
+
+<!-- 微信付款码弹窗 -->
+<view class="payment-modal" wx:if="{{showPaymentModal}}" catchtap="hidePaymentModal">
+  <view class="payment-container" catchtap="preventClose">
+    <view class="payment-header">
+      <text class="payment-title">微信支付 · {{currentHotel.name}}</text>
+      <view class="close-btn" bindtap="hidePaymentModal">×</view>
+    </view>
+
+    <scroll-view class="payment-content" scroll-y>
+      <view class="payment-detail">
+        <view class="detail-item"><text class="detail-label">每晚</text><text class="detail-value">¥{{paymentDetail.basePrice}}</text></view>
+        <view class="detail-item"><text class="detail-label">房间</text><text class="detail-value">{{paymentDetail.quantity}}间</text></view>
+        <view class="detail-item"><text class="detail-label">晚数</text><text class="detail-value">{{paymentDetail.nights}}晚</text></view>
+        <view class="detail-item"><text class="detail-label">入住</text><text class="detail-value">{{paymentDetail.checkInDate}}</text></view>
+        <view class="detail-item"><text class="detail-label">退房</text><text class="detail-value">{{paymentDetail.checkOutDate}}</text></view>
+        <view class="detail-total">
+          <text class="total-label">应付</text>
+          <text class="total-value">¥{{paymentAmount}}</text>
+        </view>
+      </view>
+
+      <view class="payment-qrcode-wrap">
+      <text class="payment-desc">长按识别下方二维码完成支付</text>
+      <image class="payment-qrcode" src="{{currentPaymentQRCode}}" mode="aspectFit" bindtap="previewPaymentQRCode"></image>
+      </view>
+
+      <view class="wechat-info">
+        <text class="wechat-label">客服微信</text>
+        <text class="wechat-number">{{currentWechat}}</text>
+      </view>
+      <text class="payment-notice">付款后请截图并发给客服微信确认订单</text>
+    </scroll-view>
+
+    <view class="payment-actions">
+      <button class="confirm-btn" bindtap="confirmPayment"><text class="confirm-btn-text">已完成支付</text></button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,175 @@
+/* 风景页 pages/onepage/onepage.wxss */
+/* 阿里妈妈东方大楷：在线链接仅供体验与调试，企业客户请下载字体包自行发布并备份 */
+@font-face {
+  font-family: "阿里妈妈东方大楷 Regular";
+  font-weight: 400;
+  src: url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/DLtJFOcyJ3gD.woff2") format("woff2"),
+       url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/OalkjTNsCgkF.woff") format("woff");
+  font-variation-settings: normal;
+  font-display: swap;
+}
+
+/* 自然与生态奇观：单独使用另一套在线字体链接 */
+@font-face {
+  font-family: "阿里妈妈东方大楷2 Regular";
+  font-weight: 400;
+  src: url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/80dDFyzU3jmf.woff2") format("woff2"),
+       url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/Jtzh4IdnX4fO.woff") format("woff");
+  font-variation-settings: normal;
+  font-display: swap;
+}
+
+.webfont-dakai {
+  font-family: "阿里妈妈东方大楷 Regular";
+  font-variation-settings: normal;
+}
+
+.webfont-eco {
+  font-family: "阿里妈妈东方大楷2 Regular";
+  font-variation-settings: normal;
+}
+
+/* 地质与登山景观：单独使用另一套在线字体链接 */
+@font-face {
+  font-family: "阿里妈妈东方大楷3 Regular";
+  font-weight: 400;
+  src: url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/nJbG9nXE6iX9.woff2") format("woff2"),
+       url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/PU387QsuT9IA.woff") format("woff");
+  font-variation-settings: normal;
+  font-display: swap;
+}
+
+.webfont-geology {
+  font-family: "阿里妈妈东方大楷3 Regular";
+  font-variation-settings: normal;
+}
+
+/* 道教文化遗址：单独使用另一套在线字体链接 */
+@font-face {
+  font-family: "阿里妈妈东方大楷4 Regular";
+  font-weight: 400;
+  src: url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/YDf4MGVXl2bT.woff2") format("woff2"),
+       url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/ByH9ro2VtfWM.woff") format("woff");
+  font-variation-settings: normal;
+  font-display: swap;
+}
+
+.webfont-taoist {
+  font-family: "阿里妈妈东方大楷4 Regular";
+  font-variation-settings: normal;
+}
+
+/* 季节限定景观：单独使用另一套在线字体链接 */
+@font-face {
+  font-family: "阿里妈妈东方大楷5 Regular";
+  font-weight: 400;
+  src: url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/jrKzao8EQAow.woff2") format("woff2"),
+       url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/5qr3Oc0BM6l8.woff") format("woff");
+  font-variation-settings: normal;
+  font-display: swap;
+}
+
+.webfont-season {
+  font-family: "阿里妈妈东方大楷5 Regular";
+  font-variation-settings: normal;
+}
+
+.container {
+  background-color: #f7f9fc;
+  background-image: url("https://youke.xn--y7xa690gmna.cn/s1/2026/01/27/697860dbcfb5c.webp");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  min-height: 100vh;
+  padding: 15rpx;
+}
+
+.section {
+  margin-bottom: 32rpx;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin-bottom: 4rpx;
+}
+
+/* 与首页「今日景区客流」一致的标题装饰（同底图） */
+.title-decoration-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 640rpx;
+  min-height: 72rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  margin: 0 auto;
+}
+
+.title-decoration-img {
+  width: 100%;
+  max-width: 640rpx;
+  height: 72rpx;
+  display: block;
+  border-radius: 14rpx;
+}
+
+.title-decoration-text {
+  position: absolute;
+  font-size: 42rpx;
+  font-weight: bold;
+  color: #000000;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40rpx;
+}
+
+.card {
+  background: white;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 30rpx rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+/* 景点图片样式 */
+.scenery-image {
+  width: 100%;
+  height: 450rpx;
+  display: block;
+}
+
+/* 景点信息样式 */
+.info {
+  padding: 30rpx;
+}
+.name {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #2c3e50;
+  display: block;
+  margin-bottom: 20rpx;
+}
+.description {
+  font-size: 30rpx;
+  line-height: 1.6;
+  color: #555;
+  display: block;
+  margin-bottom: 25rpx;
+}
+.meta {
+  font-size: 28rpx;
+  color: #7f8c8d;
+}

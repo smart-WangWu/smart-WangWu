@@ -1,0 +1,330 @@
+<!-- 民宿详情：大众点评式浅色信息流 + 问大家 + 评价 + 预订 -->
+<view class="dp-root">
+  <scroll-view class="dp-scroll" scroll-y wx:if="{{homestay}}">
+
+    <!-- 头图 -->
+    <view class="dp-cover-wrap">
+      <image class="dp-cover-img" src="{{homestay.imageUrl}}" mode="aspectFill" lazy-load="{{true}}" />
+      <view class="dp-cover-actions">
+        <view class="dp-cover-pill" hover-class="dp-cover-pill--a" bindtap="onAlbumTap">相册 ></view>
+      </view>
+    </view>
+
+    <view class="dp-body">
+
+      <!-- 标题 + 评分行 -->
+      <view class="dp-title-block">
+        <view class="dp-title-row">
+          <text class="dp-title">{{homestay.nameFull}}</text>
+          <text wx:if="{{homestay.chainTag}}" class="dp-chain">{{homestay.chainTag}}</text>
+        </view>
+        <view class="dp-rate-row">
+          <view class="dp-stars">
+            <block wx:for="{{homestay.starStates}}" wx:for-item="st" wx:for-index="si" wx:key="si">
+              <text wx:if="{{st === 'full'}}" class="dp-star dp-star--full">★</text>
+              <view wx:elif="{{st === 'half'}}" class="dp-star-half-wrap">
+                <text class="dp-star dp-star--empty">★</text>
+                <text class="dp-star dp-star--full dp-star--clip">★</text>
+              </view>
+              <text wx:else class="dp-star dp-star--empty">★</text>
+            </block>
+          </view>
+          <text class="dp-score">{{homestay.ratingStr}}</text>
+          <text class="dp-reviews" bindtap="onReviewCountTap">{{homestay.reviewCountText}} ></text>
+          <text class="dp-avg">{{homestay.category}}</text>
+        </view>
+        <view class="dp-subrate">
+          <text>卫生{{homestay.cleanlinessScore}}</text>
+          <text class="dp-subgap">环境{{homestay.envScore}}</text>
+          <text class="dp-subgap">服务{{homestay.serviceScore}}</text>
+        </view>
+        <view class="dp-cate-line">{{homestay.category}} · {{homestay.addressShort}}</view>
+        <view class="dp-rank-bar" bindtap="onRankTap">
+          <text class="dp-rank-badge">住宿榜单</text>
+          <text class="dp-rank-text">{{homestay.rankingLine}} ></text>
+        </view>
+      </view>
+
+      <!-- 入住 / 退房时间 -->
+      <view class="dp-section dp-section--tight">
+        <view class="dp-hours-line">
+          <text class="dp-hours-main">{{homestay.bizStatus}}</text>
+          <text class="dp-hours-time">入住 {{homestay.checkInTime}} · 退房 {{homestay.checkOutTime}}</text>
+        </view>
+        <view class="dp-facility-row">
+          <text class="dp-facility" wx:for="{{homestay.facilities}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+
+      <!-- 地址 -->
+      <view class="dp-section">
+        <view class="dp-addr-main" bindtap="onMapTap">
+          <text>{{homestay.addressLine}}</text>
+          <text class="dp-chev"> ></text>
+        </view>
+        <text class="dp-addr-sub">{{homestay.distanceText}}</text>
+      </view>
+
+      <!-- 房型预订 -->
+      <view class="dp-section">
+        <view class="dp-sec-head">
+          <text class="dp-sec-title">房型预订</text>
+        </view>
+        <view class="dp-room-list">
+          <view class="dp-room-item" wx:for="{{homestay.roomTypes}}" wx:key="name">
+            <view class="dp-room-left">
+              <text class="dp-room-name">{{item.name}}</text>
+              <text class="dp-room-desc">{{item.desc}}</text>
+            </view>
+            <view class="dp-room-right">
+              <text class="dp-room-price">¥{{item.price}}</text>
+              <text class="dp-room-unit">/晚</text>
+              <view class="dp-room-btn" data-room="{{index}}" bindtap="onBookTap">预订</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 民宿特色 -->
+      <view class="dp-section">
+        <view class="dp-sec-head">
+          <text class="dp-sec-title">民宿特色</text>
+        </view>
+        <view class="dp-highlight">{{homestay.highlight}}</view>
+        <view class="dp-tag-row">
+          <text class="dp-tag" wx:for="{{homestay.tags}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+
+      <!-- 商户信息 -->
+      <view class="dp-section">
+        <text class="dp-sec-title dp-sec-title--solo">民宿信息</text>
+        <view class="dp-info-row">
+          <text class="dp-info-icon">🕐</text>
+          <view class="dp-info-body">
+            <view class="dp-info-label-row">
+              <text class="dp-info-label">入住 / 退房</text>
+              <text class="dp-info-status {{homestay.bizStatus === '休息中' ? 'dp-info-status--rest' : 'dp-info-status--open'}}">{{homestay.bizStatus}}</text>
+            </view>
+            <text class="dp-info-val">入住 {{homestay.checkInTime}} 之后 · 退房 {{homestay.checkOutTime}} 之前</text>
+          </view>
+        </view>
+        <view class="dp-info-row">
+          <text class="dp-info-icon">▦</text>
+          <view class="dp-info-body">
+            <text class="dp-info-label">配套设施</text>
+            <view class="dp-amenity-grid">
+              <text class="dp-amenity" wx:for="{{homestay.facilities}}" wx:key="*this">{{item}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 问大家 -->
+      <view class="dp-section">
+        <view class="dp-sec-head">
+          <text class="dp-sec-title">问大家</text>
+          <text class="dp-sec-more" bindtap="onAllQaTap">查看全部 ></text>
+        </view>
+        <view class="dp-qa-list">
+          <view class="dp-qa-item" wx:for="{{qaList}}" wx:key="id" wx:for-index="qix">
+            <text class="dp-qa-mark">问</text>
+            <view class="dp-qa-body">
+              <text class="dp-qa-q">{{item.question}}</text>
+              <view class="dp-qa-meta">
+                <text class="dp-qa-user">{{item.userNick}}</text>
+                <text class="dp-qa-date">{{item.date}}</text>
+              </view>
+              <view class="dp-answer-list">
+                <view class="dp-answer-item {{ans.isOwner ? 'dp-answer-item--owner' : ''}}" wx:for="{{item.answers}}" wx:for-item="ans" wx:for-index="aix" wx:key="id">
+                  <view class="dp-answer-hd">
+                    <text class="dp-answer-user">{{ans.user}}</text>
+                    <text class="dp-answer-date">{{ans.date}}</text>
+                  </view>
+                  <text class="dp-answer-txt">{{ans.content}}</text>
+                </view>
+              </view>
+              <view class="dp-reply-row">
+                <input class="dp-reply-input" placeholder="写下你的回答..." value="{{replyInputs[item.id] || ''}}" data-qid="{{item.id}}" bindinput="onReplyInput" bindconfirm="onReplyConfirm" />
+                <view class="dp-reply-btn {{replyBtnActive[item.id] ? 'dp-reply-btn--active' : ''}}" data-qid="{{item.id}}" bindtap="onReplyConfirm">发送</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="dp-qa-input-bar" bindtap="onAskTap">
+          <text class="dp-qa-ph">你想了解什么？最快 2 分钟内有回答</text>
+          <text class="dp-qa-btn">提问</text>
+        </view>
+      </view>
+
+      <!-- 评价 -->
+      <view class="dp-section dp-section--last">
+        <view class="dp-sec-head">
+          <text class="dp-sec-title">评价</text>
+          <text class="dp-sec-more" bindtap="onAllReviewsTap">查看全部 ></text>
+        </view>
+        <view class="dp-write-review" bindtap="onWriteReviewTap">
+          <image class="dp-write-avatar" src="{{userInfo.avatarUrl || defaultAvatarUrl}}" mode="aspectFill" />
+          <text class="dp-write-ph">写下你的住宿体验...</text>
+          <view class="dp-write-stars">
+            <text class="dp-write-star" wx:for="{{scoreStarList}}" wx:key="*this">★</text>
+          </view>
+        </view>
+        <view class="dp-review" wx:for="{{reviews}}" wx:key="id" wx:for-index="rix">
+          <view class="dp-review-hd">
+            <image class="dp-review-avatar" src="{{item.avatarUrl || homestay.imageUrl}}" mode="aspectFill" />
+            <text class="dp-review-name">{{item.user}}</text>
+            <text class="dp-review-lv" wx:if="{{item.level}}">{{item.level}}</text>
+            <text class="dp-review-date">{{item.date}}</text>
+          </view>
+          <view class="dp-review-meta">
+            <text class="dp-review-mood" wx:if="{{item.mood}}">{{item.mood}}</text>
+            <view class="dp-stars dp-stars--sm">
+              <block wx:for="{{item.starStates}}" wx:for-item="st" wx:for-index="rj" wx:key="rj">
+                <text wx:if="{{st === 'full'}}" class="dp-star dp-star--full dp-star--sm">★</text>
+                <view wx:elif="{{st === 'half'}}" class="dp-star-half-wrap dp-star-half-wrap--sm">
+                  <text class="dp-star dp-star--empty dp-star--sm">★</text>
+                  <text class="dp-star dp-star--full dp-star--clip dp-star--sm">★</text>
+                </view>
+                <text wx:else class="dp-star dp-star--empty dp-star--sm">★</text>
+              </block>
+            </view>
+            <text class="dp-review-badge" wx:if="{{item.badge}}">{{item.badge}}</text>
+          </view>
+          <text class="dp-review-txt">{{item.content}}</text>
+          <view class="dp-review-pics" wx:if="{{item.images && item.images.length > 0}}">
+            <view class="dp-review-pic-wrap" wx:for="{{item.images}}" wx:for-item="pic" wx:for-index="pi" wx:key="pi">
+              <image class="dp-review-pic" src="{{pic}}" mode="aspectFill" />
+              <view wx:if="{{pi === item.images.length - 1 && item.imageMore > 0}}" class="dp-review-more">
+                <text class="dp-review-more-t">图 {{item.imageMore}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="dp-review-footer">
+            <text class="dp-review-help" wx:if="{{!item.isMock}}">{{item.helpful || 0}} 人认为有帮助</text>
+            <text class="dp-review-badge-owner" wx:if="{{item.isMock}}">游客评价</text>
+            <view class="dp-review-actions">
+              <text class="dp-review-action" wx:if="{{!item.isMock}}" data-revid="{{item.id}}" bindtap="onDeleteReviewTap">删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="dp-safe-bottom" />
+    </view>
+  </scroll-view>
+
+  <!-- 提问弹窗 -->
+  <view class="dp-modal-mask" wx:if="{{showAskModal}}" bindtap="onAskCancel" catchtouchmove="preventTouchMove" />
+  <view class="dp-modal-box dp-ask-modal" wx:if="{{showAskModal}}">
+    <view class="dp-modal-head">
+      <text class="dp-modal-title">提问</text>
+      <view class="dp-modal-close" bindtap="onAskCancel">×</view>
+    </view>
+    <textarea class="dp-ask-textarea" placeholder="写下你的问题..." maxlength="200" value="{{askInput}}" bindinput="onAskInput" />
+    <view class="dp-ask-tip">{{askInputLen}}/200</view>
+    <view class="dp-modal-submit {{askCanSubmit ? 'dp-modal-submit--active' : ''}}" bindtap="onAskSubmit">提交提问</view>
+  </view>
+
+  <!-- 评价弹窗 -->
+  <view class="dp-modal-mask" wx:if="{{showReviewModal}}" bindtap="onReviewCancel" catchtouchmove="preventTouchMove" />
+  <view class="dp-modal-box dp-review-modal" wx:if="{{showReviewModal}}">
+    <view class="dp-modal-head">
+      <text class="dp-modal-title">发表评价</text>
+      <view class="dp-modal-close" bindtap="onReviewCancel">×</view>
+    </view>
+    <view class="dp-review-merchant">
+      <image class="dp-review-merchant-img" src="{{homestay.imageUrl}}" mode="aspectFill" />
+      <text class="dp-review-merchant-name">{{homestay.nameShort}}</text>
+    </view>
+    <view class="dp-score-row">
+      <text class="dp-score-label">评分</text>
+      <view class="dp-score-stars">
+        <text class="dp-score-star {{revScore >= item ? 'dp-score-star--on' : ''}}" wx:for="{{scoreStarList}}" wx:key="*this" data-star="{{item}}" bindtap="onScoreTap">★</text>
+      </view>
+      <text class="dp-score-text">{{revScore}}/5</text>
+    </view>
+    <view class="dp-mood-row">
+      <text class="dp-score-label">心情</text>
+      <view class="dp-mood-list">
+        <text class="dp-mood-tag {{revMood === item ? 'dp-mood-tag--on' : ''}}" wx:for="{{moodOptions}}" wx:key="*this" data-mood="{{item}}" bindtap="onMoodTap">{{item}}</text>
+      </view>
+    </view>
+    <textarea class="dp-review-textarea" placeholder="分享你的住宿体验吧..." maxlength="500" value="{{revContent}}" bindinput="onReviewContentInput" />
+    <view class="dp-ask-tip">{{revContentLen}}/500</view>
+    <view class="dp-modal-submit {{revCanSubmit ? 'dp-modal-submit--active' : ''}}" bindtap="onReviewSubmit">发表评价</view>
+  </view>
+
+  <!-- 预订弹窗 -->
+  <view class="dp-modal-mask" wx:if="{{showBookModal}}" bindtap="onBookModalClose" catchtouchmove="preventTouchMove" />
+  <view class="dp-modal-box dp-book-modal" wx:if="{{showBookModal}}">
+    <view class="dp-modal-head">
+      <text class="dp-modal-title">预订房间</text>
+      <view class="dp-modal-close" bindtap="onBookModalClose">×</view>
+    </view>
+    <view class="dp-book-room-info" wx:if="{{currentRoomType}}">
+      <text class="dp-book-room-name">{{currentRoomType.name}}</text>
+      <text class="dp-book-room-price">¥{{currentRoomType.price}}<text class="dp-book-room-unit">/晚</text></text>
+    </view>
+    <view class="dp-form-row">
+      <text class="dp-form-label">姓名</text>
+      <input class="dp-form-input" placeholder="请输入姓名" value="{{formData.name}}" bindinput="onNameInput" />
+    </view>
+    <view class="dp-form-row">
+      <text class="dp-form-label">手机</text>
+      <input class="dp-form-input" type="number" placeholder="请输入手机号" value="{{formData.phone}}" bindinput="onPhoneInput" />
+    </view>
+    <view class="dp-form-row">
+      <text class="dp-form-label">入住</text>
+      <picker mode="date" value="{{formData.checkInDate}}" bindchange="onCheckInDateChange">
+        <view class="dp-form-picker {{formData.checkInDate ? '' : 'dp-form-picker--empty'}}">
+          {{formData.checkInDate || '选择入住日期'}}
+        </view>
+      </picker>
+    </view>
+    <view class="dp-form-row">
+      <text class="dp-form-label">退房</text>
+      <picker mode="date" value="{{formData.checkOutDate}}" bindchange="onCheckOutDateChange">
+        <view class="dp-form-picker {{formData.checkOutDate ? '' : 'dp-form-picker--empty'}}">
+          {{formData.checkOutDate || '选择退房日期'}}
+        </view>
+      </picker>
+    </view>
+    <view class="dp-form-row">
+      <text class="dp-form-label">数量</text>
+      <view class="dp-form-stepper">
+        <view class="dp-form-stepper-btn" bindtap="decreaseQuantity">−</view>
+        <text class="dp-form-stepper-val">{{formData.quantity}}</text>
+        <view class="dp-form-stepper-btn" bindtap="increaseQuantity">+</view>
+      </view>
+      <text class="dp-form-label">间</text>
+    </view>
+    <view class="dp-form-agree">
+      <checkbox-group bindchange="onFormAgreeChange">
+        <label class="dp-form-agree-label">
+          <checkbox value="agree" color="#ff4d1a" />
+          <text class="dp-form-agree-text">我已阅读并同意</text>
+          <text class="dp-form-agree-link">《用户服务协议与隐私政策》</text>
+        </label>
+      </checkbox-group>
+    </view>
+    <view class="dp-modal-submit {{formAgreed && formData.name && formData.phone && formData.checkInDate && formData.checkOutDate ? 'dp-modal-submit--active' : ''}}" bindtap="submitBooking">提交预订</view>
+  </view>
+
+  <!-- 付款弹窗 -->
+  <view class="dp-modal-mask" wx:if="{{showPaymentModal}}" bindtap="hidePaymentModal" catchtouchmove="preventTouchMove" />
+  <view class="dp-modal-box dp-payment-modal" wx:if="{{showPaymentModal}}">
+    <view class="dp-modal-head">
+      <text class="dp-modal-title">支付</text>
+      <view class="dp-modal-close" bindtap="hidePaymentModal">×</view>
+    </view>
+    <view class="dp-payment-amount">¥{{paymentAmount}}</view>
+    <view class="dp-payment-tip">请扫码支付后联系客服确认订单</view>
+    <image class="dp-payment-qr" src="{{paymentQRCode}}" mode="aspectFit" bindtap="previewPaymentQRCode" />
+    <view class="dp-modal-submit dp-modal-submit--active" bindtap="confirmPayment">我已支付，复制客服微信</view>
+  </view>
+
+  <view class="dp-empty" wx:else>
+    <text class="dp-empty-t">未找到该民宿</text>
+  </view>
+</view>

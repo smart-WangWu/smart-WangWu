@@ -1,0 +1,131 @@
+<view class="detail-page">
+  <!-- 图片轮播区域 -->
+  <swiper class="image-swiper" indicator-dots="true" autoplay="false" circular="true" indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#fff">
+    <swiper-item wx:for="{{imageList}}" wx:key="index">
+      <image class="swiper-image" src="{{item}}" mode="aspectFill" bindtap="onImagePreview" data-index="{{index}}"/>
+    </swiper-item>
+  </swiper>
+
+  <!-- 图片计数指示器 -->
+  <view class="image-count" wx:if="{{imageList.length > 1}}">
+    <text class="count-text">{{currentImageIndex + 1}}/{{imageList.length}}</text>
+  </view>
+
+  <!-- 内容区域 -->
+  <view class="content-area">
+    <!-- 标题 -->
+    <text class="detail-title">{{title}}</text>
+
+    <!-- 作者信息 -->
+    <view class="author-section">
+      <view class="author-left" bindtap="onAuthorTap" data-id="{{authorId}}">
+        <image class="author-avatar" src="{{authorAvatar}}" mode="aspectFill"/>
+        <view class="author-info">
+          <view class="author-row">
+            <text class="author-name">{{authorName}}</text>
+            <view class="author-badge" wx:if="{{isVip}}">
+              <text class="badge-icon">V</text>
+            </view>
+          </view>
+          <text class="publish-time">{{publishTime}}</text>
+        </view>
+      </view>
+      <view class="author-right">
+        <button class="follow-btn {{isFollowed ? 'followed' : ''}}" bindtap="onFollow" hover-class="follow-hover">
+          <text class="follow-text">{{isFollowed ? '已关注' : '+ 关注'}}</text>
+        </button>
+      </view>
+    </view>
+
+    <!-- 正文内容 -->
+    <view class="main-content">
+      <text class="content-text">{{content}}</text>
+    </view>
+
+    <!-- 地点标签 -->
+    <view class="location-section" wx:if="{{location}}">
+      <view class="location-tag">
+        <text class="location-icon">📍</text>
+        <text class="location-text">{{location}}</text>
+      </view>
+    </view>
+
+    <!-- 互动数据栏 -->
+    <view class="stats-bar">
+      <view class="stat-item" bindtap="onLike">
+        <text class="stat-icon {{isLiked ? 'active' : ''}}">❤️</text>
+        <text class="stat-num">{{likes}}</text>
+      </view>
+      <view class="stat-divider"/>
+      <view class="stat-item" bindtap="onComment">
+        <text class="stat-icon">💬</text>
+        <text class="stat-num">{{comments}}</text>
+      </view>
+      <view class="stat-divider"/>
+      <view class="stat-item" bindtap="onCollect">
+        <text class="stat-icon {{isCollected ? 'active' : ''}}">⭐</text>
+        <text class="stat-num">{{collects}}</text>
+      </view>
+    </view>
+
+    <!-- 评论区标题 -->
+    <view class="comment-section-header">
+      <text class="comment-title">评论 {{comments}}</text>
+    </view>
+
+    <!-- 评论区列表 -->
+    <view class="comment-list">
+      <view class="comment-item" wx:for="{{commentList}}" wx:key="id">
+        <view class="comment-left">
+          <image class="comment-avatar" src="{{item.avatar}}" mode="aspectFill"/>
+        </view>
+        <view class="comment-right">
+          <view class="comment-top">
+            <text class="comment-name">{{item.name}}</text>
+            <text class="comment-time">{{item.time}}</text>
+          </view>
+          <text class="comment-content">{{item.content}}</text>
+          <view class="comment-actions">
+            <text class="comment-like {{item.isLiked ? 'active' : ''}}" bindtap="onCommentLike" data-id="{{item.id}}">
+              ❤️ {{item.likes}}
+            </text>
+            <text class="comment-reply" bindtap="onReply" data-id="{{item.id}}">回复</text>
+          </view>
+          <!-- 子评论 -->
+          <view class="sub-comment-list" wx:if="{{item.subComments && item.subComments.length > 0}}">
+            <view class="sub-comment-item" wx:for="{{item.subComments}}" wx:for-item="subItem" wx:key="id">
+              <text class="sub-name">{{subItem.name}}:</text>
+              <text class="sub-content">{{subItem.content}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 无评论提示 -->
+      <view class="empty-comment" wx:if="{{commentList.length === 0}}">
+        <text class="empty-text">还没有评论，快来抢沙发~</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="bottom-input" bindtap="onCommentInput">
+      <text class="input-hint">说点什么...</text>
+    </view>
+    <view class="bottom-actions">
+      <view class="action-item {{isLiked ? 'active' : ''}}" bindtap="onLike">
+        <text class="action-icon">❤️</text>
+        <text class="action-text">{{likes}}</text>
+      </view>
+      <view class="action-item {{isCollected ? 'active' : ''}}" bindtap="onCollect">
+        <text class="action-icon">⭐</text>
+        <text class="action-text">{{collects}}</text>
+      </view>
+      <view class="action-item" bindtap="onShare">
+        <text class="action-icon">↗️</text>
+        <text class="action-text">分享</text>
+      </view>
+    </view>
+  </view>
+</view>

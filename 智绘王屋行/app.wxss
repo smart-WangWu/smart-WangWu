@@ -1,0 +1,27 @@
+/**app.wxss**/
+/* 刀隶体-天坛极顶用 */
+@font-face {
+  font-family: "阿里妈妈刀隶体 Regular";
+  font-weight: 400;
+  src: url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/TXmTUwmY9Byx.woff2") format("woff2"),
+       url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/3ehsW3D6cVN0.woff") format("woff");
+  font-variation-settings: normal;
+  font-display: swap;
+}
+/* 刀隶体-今日景区客流用（单独一套，避免和天坛极顶互相顶掉） */
+@font-face {
+  font-family: "阿里妈妈刀隶体 客流";
+  font-weight: 400;
+  src: url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/9l1kYrAFnqlm.woff2") format("woff2"),
+       url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/6uVGLuPy6GCa.woff") format("woff");
+  font-variation-settings: normal;
+  font-display: swap;
+}
+.webfont {
+  font-family: "阿里妈妈刀隶体 Regular" !important;
+  font-variation-settings: normal;
+}
+.webfont-traffic {
+  font-family: "阿里妈妈刀隶体 客流" !important;
+  font-variation-settings: normal;
+}
