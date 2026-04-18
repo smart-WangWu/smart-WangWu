@@ -35,6 +35,12 @@
     "pages/privacy/privacy",
     "pages/user-agreement/user-agreement"
   ],
+  "subpackages": [
+  {
+    "root": "miniprogram/chat-map",
+    "pages": ["pages/chat-map/index"]
+  }
+],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "Weixin",
