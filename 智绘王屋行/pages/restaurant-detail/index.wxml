@@ -1,0 +1,363 @@
+<!-- 商家详情：大众点评式浅色信息流 + 问大家 + 评价 -->
+<view class="dp-root">
+  <scroll-view class="dp-scroll" scroll-y wx:if="{{merchant}}">
+
+    <!-- 头图 -->
+    <view class="dp-cover-wrap">
+      <image
+        class="dp-cover-img"
+        src="{{merchant.imageUrl}}"
+        mode="aspectFill"
+        lazy-load="{{true}}"
+      />
+      <view class="dp-cover-actions">
+        <view class="dp-cover-pill" hover-class="dp-cover-pill--a" bindtap="onAlbumTap">相册 ></view>
+        <view class="dp-cover-pill" hover-class="dp-cover-pill--a" bindtap="onVideoTap">视频 ></view>
+      </view>
+    </view>
+
+    <view class="dp-body">
+
+      <!-- 标题 + 评分行 -->
+      <view class="dp-title-block">
+        <view class="dp-title-row">
+          <text class="dp-title">{{merchant.nameFull}}</text>
+          <text wx:if="{{merchant.chainTag}}" class="dp-chain">{{merchant.chainTag}}</text>
+        </view>
+        <view class="dp-rate-row">
+          <view class="dp-stars">
+            <block wx:for="{{merchant.starStates}}" wx:for-item="st" wx:for-index="si" wx:key="si">
+              <text wx:if="{{st === 'full'}}" class="dp-star dp-star--full">★</text>
+              <view wx:elif="{{st === 'half'}}" class="dp-star-half-wrap">
+                <text class="dp-star dp-star--empty">★</text>
+                <text class="dp-star dp-star--full dp-star--clip">★</text>
+              </view>
+              <text wx:else class="dp-star dp-star--empty">★</text>
+            </block>
+          </view>
+          <text class="dp-score">{{merchant.ratingStr}}</text>
+          <text class="dp-reviews" bindtap="onReviewCountTap">{{merchant.reviewCountText}} ></text>
+          <text class="dp-avg">{{merchant.avgPerPersonText}}</text>
+        </view>
+        <view class="dp-subrate">
+          <text>口味{{merchant.tasteScore}}</text>
+          <text class="dp-subgap">环境{{merchant.envScore}}</text>
+          <text class="dp-subgap">服务{{merchant.serviceScore}}</text>
+        </view>
+        <view class="dp-cate-line">{{merchant.category}}  {{merchant.area}}</view>
+        <view class="dp-rank-bar" hover-class="dp-rank-bar--a" bindtap="onRankTap">
+          <text class="dp-rank-badge">点评榜单</text>
+          <text class="dp-rank-text">{{merchant.rankingLine}} ></text>
+        </view>
+      </view>
+
+      <!-- 营业 / 设施 -->
+      <view class="dp-section dp-section--tight">
+        <view class="dp-hours-line">
+          <text class="dp-hours-main">{{merchant.bizStatus}}</text>
+          <text class="dp-hours-time">{{merchant.hours}}</text>
+          <text class="dp-link-r" bindtap="onMoreServiceTap"></text>
+        </view>
+        <view class="dp-facility-row">
+          <text class="dp-facility" wx:for="{{merchant.facilities}}" wx:key="*this">{{item}}</text>
+        </view>
+      </view>
+
+      <!-- 地址与操作 -->
+      <view class="dp-section">
+        <view class="dp-addr-main" bindtap="onMapTap">
+          <text>{{merchant.addressLine}}</text>
+          <text class="dp-chev"> ></text>
+        </view>
+        <text class="dp-addr-sub">{{merchant.distanceText}}</text>
+      </view>
+
+      <!-- 到店套餐 -->
+      <view class="dp-section">
+        <view class="dp-sec-head">
+          <text class="dp-sec-title">到店套餐</text>
+          <view class="dp-sec-guarantee">
+            <text class="dp-guarantee-i">随时退</text>
+            <text class="dp-guarantee-i">过期退</text>
+          </view>
+        </view>
+        <view
+          class="dp-deal"
+          wx:for="{{merchant.deals}}"
+          wx:for-item="deal"
+          wx:key="title"
+        >
+          <image class="dp-deal-img" src="{{deal.imageUrl}}" mode="aspectFill" />
+          <view class="dp-deal-mid">
+            <view class="dp-deal-title-row">
+              <text wx:if="{{deal.tag}}" class="dp-deal-tag">{{deal.tag}}</text>
+              <text class="dp-deal-title">{{deal.title}}</text>
+            </view>
+            <text class="dp-deal-rule">{{deal.rule}}</text>
+            <view class="dp-deal-price-row">
+              <text class="dp-deal-price">¥{{deal.price}}</text>
+              <text class="dp-deal-discount">{{deal.discount}}</text>
+              <text class="dp-deal-orig">¥{{deal.origPrice}}</text>
+            </view>
+          </view>
+          <view class="dp-deal-right">
+            <view class="dp-deal-btn" hover-class="dp-deal-btn--a" bindtap="onGrabTap" data-title="{{deal.title}}">抢购</view>
+            <text class="dp-deal-sales">{{deal.sales}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 推荐菜 -->
+      <view class="dp-section">
+        <view class="dp-sec-head">
+          <text class="dp-sec-title">推荐菜</text>
+          <text class="dp-sec-more" bindtap="onMoreDishesTap">查看全部 ></text>
+        </view>
+        <text class="dp-dish-sub">{{merchant.dishSectionTitle}}</text>
+        <view class="dp-dish-grid">
+          <view
+            class="dp-dish-cell {{dishLikes[item.name] ? 'dp-dish-cell--liked' : ''}}"
+            wx:for="{{merchant.dishes}}"
+            wx:key="name"
+            data-dish="{{item.name}}"
+            bindtap="onDishLikeTap"
+          >
+            <text class="dp-dish-name">{{item.name}}</text>
+            <text class="dp-dish-like {{dishLikes[item.name] ? 'dp-dish-like--on' : ''}}">👍 {{item.likes + (dishLikes[item.name] ? 1 : 0)}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 商户信息 -->
+      <view class="dp-section">
+        <text class="dp-sec-title dp-sec-title--solo">商户信息</text>
+        <view class="dp-info-row">
+          <text class="dp-info-icon">🕐</text>
+          <view class="dp-info-body">
+            <view class="dp-info-label-row">
+              <text class="dp-info-label">营业时间</text>
+              <text class="dp-info-status {{merchant.bizStatus === '休息中' ? 'dp-info-status--rest' : 'dp-info-status--open'}}">{{merchant.bizStatus}}</text>
+            </view>
+            <text class="dp-info-val">{{merchant.hours}}</text>
+          </view>
+        </view>
+        <view class="dp-info-row">
+          <text class="dp-info-icon">▦</text>
+          <view class="dp-info-body">
+            <text class="dp-info-label">其他</text>
+            <view class="dp-amenity-grid">
+              <text class="dp-amenity" wx:for="{{merchant.facilities}}" wx:key="*this">{{item}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 问大家 -->
+      <view class="dp-section">
+        <view class="dp-sec-head">
+          <text class="dp-sec-title">问大家</text>
+          <text class="dp-sec-more" bindtap="onAllQaTap">查看全部 ></text>
+        </view>
+
+        <!-- 问题列表 -->
+        <view class="dp-qa-list">
+          <view class="dp-qa-item" wx:for="{{qaList}}" wx:key="id" wx:for-index="qix">
+            <text class="dp-qa-mark">问</text>
+            <view class="dp-qa-body">
+              <text class="dp-qa-q">{{item.question}}</text>
+              <view class="dp-qa-meta">
+                <text class="dp-qa-user">{{item.userNick}}</text>
+                <text class="dp-qa-date">{{item.date}}</text>
+              </view>
+              <!-- 已有回答 -->
+              <view class="dp-answer-list">
+                <view
+                  class="dp-answer-item {{ans.isOwner ? 'dp-answer-item--owner' : ''}}"
+                  wx:for="{{item.answers}}"
+                  wx:for-item="ans"
+                  wx:for-index="aix"
+                  wx:key="id"
+                >
+                  <view class="dp-answer-hd">
+                    <text class="dp-answer-user">{{ans.user}}</text>
+                    <text class="dp-answer-date">{{ans.date}}</text>
+                  </view>
+                  <text class="dp-answer-txt">{{ans.content}}</text>
+                </view>
+              </view>
+              <!-- 回复输入框 -->
+              <view class="dp-reply-row">
+                <input
+                  class="dp-reply-input"
+                  placeholder="写下你的回答..."
+                  value="{{replyInputs[item.id] || ''}}"
+                  data-qid="{{item.id}}"
+                  bindinput="onReplyInput"
+                  bindconfirm="onReplyConfirm"
+                />
+                <view
+                  class="dp-reply-btn {{replyBtnActive[item.id] ? 'dp-reply-btn--active' : ''}}"
+                  data-qid="{{item.id}}"
+                  bindtap="onReplyConfirm"
+                >发送</view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <!-- 底部提问条 -->
+        <view class="dp-qa-input-bar" bindtap="onAskTap">
+          <text class="dp-qa-ph">你想了解什么？最快 2 分钟内有回答</text>
+          <text class="dp-qa-btn">提问</text>
+        </view>
+      </view>
+
+      <!-- 评价 -->
+      <view class="dp-section dp-section--last">
+        <view class="dp-sec-head">
+          <text class="dp-sec-title">评价</text>
+          <text class="dp-sec-more" bindtap="onAllReviewsTap">查看全部 ></text>
+        </view>
+
+        <!-- 用户发表评价入口 -->
+        <view class="dp-write-review" bindtap="onWriteReviewTap">
+          <image class="dp-write-avatar" src="{{userInfo.avatarUrl || defaultAvatarUrl}}" mode="aspectFill" />
+          <text class="dp-write-ph">写下你的评价...</text>
+          <view class="dp-write-stars">
+            <text class="dp-write-star" wx:for="{{scoreStarList}}" wx:key="*this">★</text>
+          </view>
+        </view>
+
+        <!-- 评价列表 -->
+        <view class="dp-review" wx:for="{{reviews}}" wx:key="id" wx:for-index="rix">
+          <view class="dp-review-hd">
+            <image class="dp-review-avatar" src="{{item.avatarUrl || merchant.imageUrl}}" mode="aspectFill" />
+            <text class="dp-review-name">{{item.user}}</text>
+            <text class="dp-review-lv" wx:if="{{item.level}}">{{item.level}}</text>
+            <text class="dp-review-date">{{item.date}}</text>
+          </view>
+          <view class="dp-review-meta">
+            <text class="dp-review-mood" wx:if="{{item.mood}}">{{item.mood}}</text>
+            <view class="dp-stars dp-stars--sm">
+              <block wx:for="{{item.starStates}}" wx:for-item="st" wx:for-index="rj" wx:key="rj">
+                <text wx:if="{{st === 'full'}}" class="dp-star dp-star--full dp-star--sm">★</text>
+                <view wx:elif="{{st === 'half'}}" class="dp-star-half-wrap dp-star-half-wrap--sm">
+                  <text class="dp-star dp-star--empty dp-star--sm">★</text>
+                  <text class="dp-star dp-star--full dp-star--clip dp-star--sm">★</text>
+                </view>
+                <text wx:else class="dp-star dp-star--empty dp-star--sm">★</text>
+              </block>
+            </view>
+            <text class="dp-review-badge" wx:if="{{item.badge}}">{{item.badge}}</text>
+          </view>
+          <text class="dp-review-txt">{{item.content}}</text>
+          <view class="dp-review-pics" wx:if="{{item.images && item.images.length > 0}}">
+            <view
+              class="dp-review-pic-wrap"
+              wx:for="{{item.images}}"
+              wx:for-item="pic"
+              wx:for-index="pi"
+              wx:key="pi"
+            >
+              <image class="dp-review-pic" src="{{pic}}" mode="aspectFill" />
+              <view
+                wx:if="{{pi === item.images.length - 1 && item.imageMore > 0}}"
+                class="dp-review-more"
+              >
+                <text class="dp-review-more-t">图 {{item.imageMore}}</text>
+              </view>
+            </view>
+          </view>
+          <view class="dp-review-footer">
+            <text class="dp-review-help" wx:if="{{!item.isMock}}">{{item.helpful || 0}} 人认为有帮助</text>
+            <text class="dp-review-badge-owner" wx:if="{{item.isMock}}">游客评价</text>
+            <view class="dp-review-actions">
+              <text class="dp-review-action" wx:if="{{!item.isMock}}" data-revid="{{item.id}}" bindtap="onDeleteReviewTap">删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="dp-safe-bottom" />
+    </view>
+  </scroll-view>
+
+  <!-- 提问弹窗 -->
+  <view class="dp-modal-mask" wx:if="{{showAskModal}}" bindtap="onAskCancel" catchtouchmove="preventTouchMove" />
+  <view class="dp-modal-box dp-ask-modal" wx:if="{{showAskModal}}">
+    <view class="dp-modal-head">
+      <text class="dp-modal-title">提问</text>
+      <view class="dp-modal-close" bindtap="onAskCancel">×</view>
+    </view>
+    <textarea
+      class="dp-ask-textarea"
+      placeholder="写下你的问题..."
+      maxlength="200"
+      value="{{askInput}}"
+      bindinput="onAskInput"
+    />
+    <view class="dp-ask-tip">{{askInputLen}}/200</view>
+    <view
+      class="dp-modal-submit {{askCanSubmit ? 'dp-modal-submit--active' : ''}}"
+      bindtap="onAskSubmit"
+    >提交提问</view>
+  </view>
+
+  <!-- 评价弹窗 -->
+  <view class="dp-modal-mask" wx:if="{{showReviewModal}}" bindtap="onReviewCancel" catchtouchmove="preventTouchMove" />
+  <view class="dp-modal-box dp-review-modal" wx:if="{{showReviewModal}}">
+    <view class="dp-modal-head">
+      <text class="dp-modal-title">发表评价</text>
+      <view class="dp-modal-close" bindtap="onReviewCancel">×</view>
+    </view>
+    <!-- 商家信息 -->
+    <view class="dp-review-merchant">
+      <image class="dp-review-merchant-img" src="{{merchant.imageUrl}}" mode="aspectFill" />
+      <text class="dp-review-merchant-name">{{merchant.nameShort}}</text>
+    </view>
+    <!-- 星级 -->
+    <view class="dp-score-row">
+      <text class="dp-score-label">评分</text>
+      <view class="dp-score-stars">
+        <text
+          class="dp-score-star {{revScore >= item ? 'dp-score-star--on' : ''}}"
+          wx:for="{{scoreStarList}}"
+          wx:key="*this"
+          data-star="{{item}}"
+          bindtap="onScoreTap"
+        >★</text>
+      </view>
+      <text class="dp-score-text">{{revScore}}/5</text>
+    </view>
+    <!-- 心情标签 -->
+    <view class="dp-mood-row">
+      <text class="dp-score-label">心情</text>
+      <view class="dp-mood-list">
+        <text
+          class="dp-mood-tag {{revMood === item ? 'dp-mood-tag--on' : ''}}"
+          wx:for="{{moodOptions}}"
+          wx:key="*this"
+          data-mood="{{item}}"
+          bindtap="onMoodTap"
+        >{{item}}</text>
+      </view>
+    </view>
+    <!-- 文字 -->
+    <textarea
+      class="dp-review-textarea"
+      placeholder="分享你的用餐体验吧..."
+      maxlength="500"
+      value="{{revContent}}"
+      bindinput="onReviewContentInput"
+    />
+    <view class="dp-ask-tip">{{revContentLen}}/500</view>
+    <view
+      class="dp-modal-submit {{revCanSubmit ? 'dp-modal-submit--active' : ''}}"
+      bindtap="onReviewSubmit"
+    >发表评价</view>
+  </view>
+
+  <view class="dp-empty" wx:else>
+    <text class="dp-empty-t">未找到该商家</text>
+  </view>
+</view>

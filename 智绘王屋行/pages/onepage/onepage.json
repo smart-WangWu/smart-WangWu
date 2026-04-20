@@ -1,0 +1,10 @@
+{
+  "usingComponents": {},
+  "onReachBottomDistance": 200,
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#efefef",
+  "backgroundTextStyle":"dark",
+  "navigationBarTitleText": "王屋山风景",
+  "navigationBarBackgroundColor": "#2c3e50",
+  "navigationBarTextStyle": "white"
+}

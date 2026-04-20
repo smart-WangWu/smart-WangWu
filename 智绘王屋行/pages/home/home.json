@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "智绘王屋",
+  "navigationStyle": "custom",
+  "navigationBarBackgroundColor": "#C8E6C9",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {},
+  "onReachBottomDistance": 200,
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#efefef",
+  "backgroundTextStyle": "dark"
+}

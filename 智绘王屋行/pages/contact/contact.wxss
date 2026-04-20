@@ -1,0 +1,587 @@
+/* ═══════════════════════════════════════════════════
+   榜单页 · 山野古风 UI
+   配色：美食橙 #FF6633 | 民宿青绿 #2A9D72 | 山背景 #F5EFE0
+   ═══════════════════════════════════════════════════ */
+
+/* ── 页面容器 ── */
+.rank-page {
+  min-height: 100vh;
+  background-image: url('https://wang-img-bed.oss-cn-beijing.aliyuncs.com/img/60c0ca1688ded.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* ═══════════════════════════════════════
+   HEADER：Tab + 说明文字
+   ═══════════════════════════════════════ */
+.rank-header {
+  padding: 20rpx 28rpx 0;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1rpx solid rgba(180,140,80,0.15);
+  border-radius: 0 0 32rpx 32rpx;
+  box-shadow: 0 4rpx 24rpx rgba(0,0,0,0.06);
+}
+
+/* ── Tab 切换器 ── */
+.rank-tabs {
+  display: flex;
+  flex-direction: row;
+  gap: 16rpx;
+  padding: 8rpx;
+  background: #ede8df;
+  border-radius: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.rank-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 18rpx 0;
+  border-radius: 14rpx;
+  font-size: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.rank-tab-icon {
+  font-size: 32rpx;
+  line-height: 1;
+}
+
+.rank-tab-text {
+  font-size: 28rpx;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* 非激活态 */
+.rank-tab--food {
+  color: #cc6633;
+}
+.rank-tab--homestay {
+  color: #1e8a5e;
+}
+
+/* 激活态 */
+.rank-tab.active {
+  font-weight: 700;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.12);
+}
+
+.rank-tab--food.active {
+  background: linear-gradient(135deg, #FF7A3D, #FF4D1A);
+  color: #ffffff;
+}
+
+.rank-tab--homestay.active {
+  background: linear-gradient(135deg, #3ECF8E, #2A9D72);
+  color: #ffffff;
+}
+
+/* ── 榜单说明 ── */
+.rank-note {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 0 0 16rpx;
+}
+
+.rank-note-icon {
+  font-size: 22rpx;
+}
+
+.rank-note-text {
+  font-size: 22rpx;
+  color: #a08860;
+  letter-spacing: 1rpx;
+}
+
+/* ═══════════════════════════════════════
+   内容区：条件显隐动画
+   ═══════════════════════════════════════ */
+.rank-content {
+  padding: 20rpx 24rpx 0;
+  transition: opacity 0.3s ease;
+}
+
+.rank-content.show {
+  display: block;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.rank-content.hide {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12rpx); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════
+   榜单区块
+   ═══════════════════════════════════════ */
+.rank-block {
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.10);
+  margin-bottom: 24rpx;
+}
+
+.rank-block--food {
+  background: linear-gradient(160deg, #FFF8F2 0%, #FFFFFF 70%);
+  border-top: 6rpx solid #FF6633;
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+.rank-block--homestay {
+  background: linear-gradient(160deg, #F0FAF5 0%, #FFFFFF 70%);
+  border-top: 6rpx solid #2A9D72;
+  border-radius: 24rpx 24rpx 0 0;
+}
+
+/* ═══════════════════════════════════════
+   冠军横幅（TOP 1 大卡片）
+   ═══════════════════════════════════════ */
+.rank-champion {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 24rpx 24rpx 20rpx;
+  background: linear-gradient(135deg, rgba(255,240,200,0.5), rgba(255,255,255,0.3));
+  border-bottom: 1rpx dashed rgba(180,140,80,0.2);
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+.rank-champion:active {
+  transform: scale(0.985);
+}
+
+.champion-crown {
+  position: absolute;
+  top: -8rpx;
+  left: 20rpx;
+  font-size: 48rpx;
+  filter: drop-shadow(0 2rpx 4rpx rgba(0,0,0,0.15));
+  animation: crownBounce 2.5s ease-in-out infinite;
+}
+
+@keyframes crownBounce {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-6rpx) rotate(5deg); }
+}
+
+.champion-img {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 16rpx;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0,0,0,0.15);
+  background: #e8e8e8;
+}
+
+.champion-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.champion-tag-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 8rpx;
+}
+
+.champion-tag {
+  font-size: 22rpx;
+  font-weight: 700;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  letter-spacing: 1rpx;
+}
+
+.champion-tag--gold {
+  color: #B8860B;
+  background: linear-gradient(135deg, #FFE066, #FFB800);
+  box-shadow: 0 2rpx 8rpx rgba(184,134,11,0.3);
+}
+
+.champion-tag--green {
+  color: #1A7A4A;
+  background: linear-gradient(135deg, #A8E6CF, #3ECF8E);
+  box-shadow: 0 2rpx 8rpx rgba(42,157,114,0.3);
+}
+
+.champion-rank-label {
+  font-size: 20rpx;
+  color: #a08860;
+  background: rgba(180,140,80,0.12);
+  padding: 4rpx 10rpx;
+  border-radius: 6rpx;
+}
+
+.champion-name {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 4rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 1rpx;
+}
+
+.champion-addr {
+  display: block;
+  font-size: 22rpx;
+  color: #a08860;
+  margin-bottom: 10rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.champion-score {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.champion-star {
+  font-size: 24rpx;
+  color: #FF6633;
+}
+
+.champion-rating {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: #FF6633;
+  margin-right: 12rpx;
+}
+
+.champion-rating--green {
+  color: #2A9D72;
+}
+
+.champion-star.champion-star--homestay { color: #2A9D72; }
+
+.champion-exp {
+  font-size: 22rpx;
+  color: #a08860;
+  background: rgba(180,140,80,0.1);
+  padding: 4rpx 10rpx;
+  border-radius: 6rpx;
+}
+
+.champion-arrow {
+  font-size: 48rpx;
+  color: #d4c4a0;
+  font-weight: 300;
+  padding-left: 8rpx;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════
+   列表区（TOP 2-5）
+   ═══════════════════════════════════════ */
+.rank-list {
+  padding: 8rpx 0 12rpx;
+}
+
+.rank-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16rpx 20rpx;
+  margin: 0 12rpx 8rpx;
+  border-radius: 16rpx;
+  gap: 14rpx;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  background: rgba(255,255,255,0.7);
+}
+
+.rank-item:active {
+  transform: scale(0.975);
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.1);
+}
+
+/* 美食榜 TOP 条目特殊背景 */
+.rank-block--food .rank-item--top2 {
+  background: linear-gradient(135deg, #FFF8F0, #FFF0E4);
+}
+.rank-block--food .rank-item--top3 {
+  background: linear-gradient(135deg, #FFF9F2, #FFF5EA);
+}
+.rank-block--food .rank-item--normal {
+  background: rgba(255,255,255,0.7);
+}
+
+/* 民宿榜 TOP 条目特殊背景 */
+.rank-block--homestay .rank-item--top2 {
+  background: linear-gradient(135deg, #F0FAF5, #E4F7EE);
+}
+.rank-block--homestay .rank-item--top3 {
+  background: linear-gradient(135deg, #F5FBF8, #ECF8F2);
+}
+.rank-block--homestay .rank-item--normal {
+  background: rgba(255,255,255,0.7);
+}
+
+/* ── 排名徽章 ── */
+.rank-medal-wrap {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rank-medal-wrap--top {
+  background: linear-gradient(135deg, #FF8833, #FF4D1A);
+  box-shadow: 0 4rpx 14rpx rgba(255,77,26,0.35);
+}
+
+.rank-block--homestay .rank-medal-wrap--top {
+  background: linear-gradient(135deg, #3ECF8E, #2A9D72);
+  box-shadow: 0 4rpx 14rpx rgba(42,157,114,0.35);
+}
+
+.rank-medal-wrap--n {
+  background: #EDE8DF;
+  box-shadow: inset 0 1rpx 0 rgba(255,255,255,0.8);
+}
+
+.rank-medal {
+  font-size: 30rpx;
+  line-height: 1;
+}
+
+.rank-num-text {
+  font-size: 24rpx;
+  font-weight: 700;
+  color: #a08860;
+}
+
+/* ── 封面图 ── */
+.rank-img {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+  background: #e8e8e8;
+  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.08);
+}
+
+.rank-item--top2 .rank-img,
+.rank-item--top3 .rank-img {
+  width: 102rpx;
+  height: 102rpx;
+  border-radius: 14rpx;
+  box-shadow: 0 4rpx 14rpx rgba(0,0,0,0.1);
+}
+
+/* ── 信息区 ── */
+.rank-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.rank-name-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 5rpx;
+}
+
+.rank-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1a1a1a;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.5rpx;
+}
+
+.rank-item--top2 .rank-name,
+.rank-item--top3 .rank-name {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+/* ── 标签：金银铜配色 ── */
+.rank-tag {
+  font-size: 20rpx;
+  font-weight: 700;
+  padding: 4rpx 10rpx;
+  border-radius: 6rpx;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.5rpx;
+}
+
+.rank-tag--gold {
+  color: #B8860B;
+  background: linear-gradient(135deg, #FFF0C0, #FFE680);
+  box-shadow: 0 2rpx 6rpx rgba(184,134,11,0.2);
+}
+
+.rank-tag--silver {
+  color: #607D8B;
+  background: #ECEFF1;
+  box-shadow: 0 2rpx 6rpx rgba(0,0,0,0.08);
+}
+
+.rank-tag--green {
+  color: #1A7A4A;
+  background: linear-gradient(135deg, #A8E6CF, #6DD5A0);
+  box-shadow: 0 2rpx 6rpx rgba(42,157,114,0.2);
+}
+
+.rank-tag--green-light {
+  color: #2A9D72;
+  background: #E8F5EE;
+  box-shadow: 0 2rpx 6rpx rgba(42,157,114,0.1);
+}
+
+/* ── 地址 ── */
+.rank-addr {
+  font-size: 22rpx;
+  color: #a08860;
+  display: block;
+  margin-bottom: 7rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── 评分行 ── */
+.rank-score-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6rpx;
+}
+
+.rank-star {
+  font-size: 22rpx;
+  color: #FF6633;
+}
+
+.rank-star--homestay {
+  color: #2A9D72;
+}
+
+.rank-rating {
+  font-size: 24rpx;
+  font-weight: 700;
+  margin-right: 10rpx;
+}
+
+.rank-rating--food {
+  color: #FF6633;
+}
+
+.rank-rating--homestay {
+  color: #2A9D72;
+}
+
+/* ── 体验进度条 ── */
+.rank-bar-wrap {
+  flex: 1;
+  max-width: 100rpx;
+  height: 5rpx;
+  background: rgba(0,0,0,0.08);
+  border-radius: 3rpx;
+  overflow: hidden;
+}
+
+.rank-bar {
+  height: 100%;
+  border-radius: 3rpx;
+}
+
+.rank-bar--food {
+  background: linear-gradient(90deg, #FFB800, #FF6633);
+}
+
+.rank-bar--homestay {
+  background: linear-gradient(90deg, #6DD5A0, #2A9D72);
+}
+
+/* ═══════════════════════════════════════
+   体验按钮（强交互反馈）
+   ═══════════════════════════════════════ */
+.rank-exp-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80rpx;
+  height: 88rpx;
+  border-radius: 14rpx;
+  flex-shrink: 0;
+  gap: 2rpx;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rank-exp-btn:active {
+  transform: scale(0.88);
+}
+
+.rank-exp-btn--food {
+  background: linear-gradient(135deg, #FFF0E8, #FFE4D4);
+  box-shadow: 0 3rpx 10rpx rgba(255,102,51,0.18);
+  border: 1rpx solid rgba(255,102,51,0.2);
+}
+
+.rank-exp-btn--homestay {
+  background: linear-gradient(135deg, #E8F8F0, #D4F0E4);
+  box-shadow: 0 3rpx 10rpx rgba(42,157,114,0.18);
+  border: 1rpx solid rgba(42,157,114,0.2);
+}
+
+.rank-exp-icon {
+  font-size: 22rpx;
+  line-height: 1;
+}
+
+.rank-exp-num {
+  font-size: 26rpx;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.rank-exp-btn--food .rank-exp-num {
+  color: #FF6633;
+}
+
+.rank-exp-btn--homestay .rank-exp-num {
+  color: #2A9D72;
+}
+
+.rank-exp-label {
+  font-size: 18rpx;
+  color: #a08860;
+  line-height: 1;
+}

@@ -1,0 +1,26 @@
+<!-- 风景页 pages/onepage/onepage.wxml -->
+<view class="container">
+  <block wx:for="{{sections}}" wx:key="id">
+    <view class="section">
+      <view class="header">
+        <view class="title-decoration-wrapper">
+          <image src="https://picui.ogmua.cn/s1/2026/03/10/69b01a53b43df.webp" class="title-decoration-img" mode="widthFix" lazy-load="{{false}}" binderror="onTitleImgError" />
+          <text class="title-decoration-text {{item.fontClass}}">{{item.title}}</text>
+        </view>
+      </view>
+      <view class="card-list">
+        <view class="card" wx:for="{{item.list}}" wx:for-item="spot" wx:key="id">
+          <image src="{{spot.imageUrl}}" class="scenery-image" mode="aspectFill" />
+          <view class="info">
+            <text class="name">{{spot.name}}</text>
+            <text class="description">{{spot.description}}</text>
+            <view class="meta">
+              <text>推荐指数: {{spot.rating}}/5</text>
+              <text> | 最佳时段: {{spot.bestTime}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

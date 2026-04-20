@@ -1,0 +1,314 @@
+<!-- 自定义导航栏：左侧搜索栏 + 中间标题 + 右侧图标 -->
+<view class="home-nav-custom" style="padding-top: {{statusBarHeight}}px;">
+  <view class="home-nav-inner">
+    <view class="home-search-bar" bindtap="onSearchTap">
+      <text class="home-search-icon">🔍</text>
+      <text class="home-search-placeholder">搜索景点、民宿</text>
+    </view>
+    <text class="home-nav-title">智绘王屋</text>
+    <view class="home-nav-right">
+      <view class="home-nav-icon" bindtap="onLocationTap">◎</view>
+    </view>
+  </view>
+</view>
+<view class="home-nav-placeholder" style="height: {{navBarHeight}}px;"></view>
+
+<!-- 搜索浮层 -->
+<view class="search-overlay" wx:if="{{searchShow}}" catchtap="onSearchClose">
+  <view class="search-panel" catchtap="">
+    <view class="search-panel-header">
+      <view class="search-panel-input-wrap">
+        <text class="search-panel-icon">🔍</text>
+        <input class="search-panel-input" placeholder="搜索景点、民宿" value="{{searchKeyword}}" bindinput="onSearchInput" focus="{{searchShow}}" placeholder-class="search-placeholder"/>
+      </view>
+      <text class="search-panel-cancel" bindtap="onSearchClose">取消</text>
+    </view>
+    <scroll-view class="search-results" scroll-y>
+      <block wx:if="{{searchKeyword.length > 0}}">
+        <view class="search-section" wx:if="{{searchSceneryResults.length > 0}}">
+          <text class="search-section-title">景点</text>
+          <view class="search-result-item" wx:for="{{searchSceneryResults}}" wx:key="name" data-type="scenery" bindtap="onSearchResultTap">
+            <text class="search-result-name">{{item.name}}</text>
+          </view>
+        </view>
+        <view class="search-section" wx:if="{{searchHomestayResults.length > 0}}">
+          <text class="search-section-title">民宿</text>
+          <view class="search-result-item" wx:for="{{searchHomestayResults}}" wx:key="id" data-type="homestay" data-index="{{index}}" bindtap="onSearchResultTap">
+            <text class="search-result-name">{{item.name}}</text>
+            <text class="search-result-extra">{{item.type}} · ¥{{item.price}}/晚</text>
+          </view>
+        </view>
+        <view class="search-empty search-empty-noresult" wx:if="{{searchSceneryResults.length === 0 && searchHomestayResults.length === 0}}">
+          <text class="search-empty-icon">🔎</text>
+          <text class="search-empty-text">未找到「{{searchKeyword}}」相关结果</text>
+          <text class="search-empty-hint">试试其他关键词</text>
+        </view>
+      </block>
+      <view class="search-empty search-empty-initial" wx:else>
+        <text class="search-empty-icon">🔍</text>
+        <text class="search-empty-text">输入景点或民宿名称进行搜索</text>
+        <text class="search-empty-hint">支持按名称、类型、地址筛选</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<view class="swiper-container">
+<swiper class="poiul" interval="3000" autoplay circular indicator-dots="{{false}}" bindchange="swiperChange">
+  <swiper-item>
+  <image src="https://wang-img-bed.oss-cn-beijing.aliyuncs.com/img/%E5%A4%A9%E5%9D%9B%E6%9E%81%E9%A1%B6.png" class="poiulk"></image>
+  </swiper-item>
+  <swiper-item>
+  <image src="https://wang-img-bed.oss-cn-beijing.aliyuncs.com/img/%E9%81%93%E8%A7%82.jpg" class="poiulk"></image>
+  </swiper-item>
+  <swiper-item>
+  <image src="https://wang-img-bed.oss-cn-beijing.aliyuncs.com/img/%E9%81%93%E5%A2%83%E5%B9%BF%E5%9C%BA.jpg" class="poiulk"></image>
+  </swiper-item>
+  <swiper-item>
+  <image src="https://wang-img-bed.oss-cn-beijing.aliyuncs.com/img/%E9%98%B3%E5%8F%B0%E5%AE%AB.jpg" class="poiulk"></image>
+  </swiper-item>
+  <swiper-item>
+  <image src="https://gitee.com/ty-4895/picture/raw/master/20250822181502317.jpg" class="poiulk"></image>
+  </swiper-item>
+  <swiper-item>
+  <image src="https://gitee.com/ty-4895/picture/raw/master/20250822181526290.jpg" class="poiulk"></image>
+  </swiper-item>
+</swiper>
+<!-- 天气信息覆盖层 -->
+<view class="weather-overlay">
+  <view class="weather-content">
+    <view class="weather-top">
+      <text class="weather-temp">{{weather.tempRange}}</text>
+      <text class="weather-separator">/</text>
+      <text class="weather-icon">🌧️</text>
+      <text class="weather-desc">{{weather.condition}}</text>
+    </view>
+    <view class="weather-title">
+      <text class="weather-title-text">天气</text>
+    </view>
+    <view class="weather-info">
+      <text class="weather-item">云海概率{{weather.cloudSeaProb}}%</text>
+    </view>
+    <view class="weather-bottom">
+      <text class="weather-item">日出时间: {{weather.sunriseTime}}</text>
+      <text class="weather-item">可见概率: {{weather.visibilityProb}}%</text>
+    </view>
+  </view>
+</view>
+<!-- 自定义分页点指示器 -->
+<view class="custom-indicator">
+  <block wx:for="{{imgUrls}}" wx:key="index">
+    <view class="indicator-dot {{index === current ? 'active' : ''}}"></view>
+  </block>
+</view>
+</view>
+<view class="plmn">
+
+<view class="pkml">
+<navigator url="/pages/threepage/threepage">
+<image src="/images/gaikuang.png" class="container1"></image>
+<text>攻略</text>
+</navigator>
+</view>
+
+<view class="pkml">
+<navigator url="/pages/onepage/onepage">
+<image src="/images/fengjing.png" class="container1"></image>
+<text>风景</text>
+</navigator>
+</view>
+
+<view class="pkml">
+<navigator url="/pages/twopage/twopage">
+<image src="/images/minsu.png" class="container1"></image>
+<text>民宿</text>
+</navigator>
+</view>
+
+<view class="pkml">
+<navigator url="/pages/fourpage/fourpage">
+<image src="/images/meishi.png" class="container1"></image>
+<text>美食</text>
+</navigator>
+</view>
+</view>
+<view class="home-traffic-wrap">
+  <view class="home-traffic-banner">
+  <image src="https://wang-img-bed.oss-cn-beijing.aliyuncs.com/img/%E6%A0%87%E9%A2%98%E8%A3%85%E9%A5%B0.png" class="home-traffic-img" mode="widthFix"></image>
+  <text class="home-traffic-text home-traffic-font webfont-traffic">今日景区客流：较少</text>
+  </view>
+</view>
+
+<!-- 景点推荐卡片列表 -->
+<view class="attractions-list">
+  <!-- 天坛极顶 · 导游预定：点击整卡进入详情页选择导游 -->
+  <navigator class="attraction-card" url="/pages/spot-detail/spot-detail?id=1">
+    <view class="card-image-wrapper">
+      <image class="card-main-image" src="https://wang-img-bed.oss-cn-beijing.aliyuncs.com/img/%E5%A4%A9%E5%9D%9B%E6%9E%81%E9%A1%B6.png" mode="aspectFill"></image>
+      <view class="image-overlay">
+        <text class="overlay-title webfont" style="font-family: 阿里妈妈刀隶体 Regular;">天坛极顶</text>
+      </view>
+      <view class="experience-count">2567人已体验</view>
+    </view>
+    <view class="card-content">
+      <view class="card-title webfont" style="font-family: 阿里妈妈刀隶体 Regular;">天坛极顶 | 总仙宫</view>
+      <view class="card-description">海拔1715米，道教圣地，俯瞰王屋山全景</view>
+      <view class="card-details">
+        <text class="detail-item">3小时时长</text>
+        <text class="detail-separator">|</text>
+        <text class="detail-item">山顶景点</text>
+        <text class="detail-separator">|</text>
+        <text class="detail-item">互动解答</text>
+      </view>
+      <view class="card-footer">
+        <text class="price">¥168起</text>
+        <view class="book-btn">预约导游</view>
+      </view>
+    </view>
+  </navigator>
+
+  <!-- 道境广场 · 导游预定：点击整卡进入详情页选择导游 -->
+  <navigator class="attraction-card" url="/pages/spot-detail/spot-detail?id=2">
+    <view class="card-image-wrapper">
+      <image class="card-main-image" src="https://wang-img-bed.oss-cn-beijing.aliyuncs.com/img/%E9%81%93%E5%A2%83%E5%B9%BF%E5%9C%BA.jpg" mode="aspectFill"></image>
+      <view class="image-overlay">
+        <text class="overlay-title webfont2">道境广场</text>
+      </view>
+      <view class="experience-count">568人已体验</view>
+    </view>
+    <view class="card-content">
+      <view class="card-title">道境广场（售票处）| 王屋山起点</view>
+      <view class="card-description">若问古今兴废事，请君只看王屋山</view>
+      <view class="card-details">
+        <text class="detail-item">精品小团</text>
+        <text class="detail-separator">|</text>
+        <text class="detail-item">文化之旅</text>
+        <text class="detail-separator">|</text>
+        <text class="detail-item">2小时精讲</text>
+      </view>
+      <view class="card-footer">
+        <text class="price">¥208起</text>
+        <view class="book-btn">预约导游</view>
+      </view>
+    </view>
+  </navigator>
+</view>
+
+<!-- 核心景点展示 -->
+<view class="scenery-showcase">
+  <view class="showcase-header">
+    <view class="header-left">
+      <view class="diamond-icon"></view>
+      <text class="header-title">核心景点</text>
+      <view class="diamond-icon"></view>
+    </view>
+    <view class="header-right">
+      <navigator url="/pages/onepage/onepage" class="more-link">全部 ></navigator>
+    </view>
+  </view>
+  <scroll-view class="scenery-scroll" scroll-x="true" show-scrollbar="false">
+    <view class="scenery-list">
+      <view class="scenery-card" wx:for="{{sceneryList}}" wx:key="id">
+        <view class="scenery-image-wrap">
+          <image class="scenery-image" src="{{item.image}}" mode="aspectFill"></image>
+          <view class="scenery-label">
+            <text class="label-sep">| </text>
+            <text class="scenery-name">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<!-- 预定民宿入口 -->
+<view class="homestay-preview">
+  <view class="showcase-header">
+    <view class="header-left">
+      <view class="diamond-icon"></view>
+      <text class="header-title">民宿推荐</text>
+      <view class="diamond-icon"></view>
+    </view>
+    <view class="header-right">
+      <navigator url="/pages/twopage/twopage" class="more-link">全部 ></navigator>
+    </view>
+  </view>
+
+  <view class="homestay-preview-list">
+    <navigator
+      class="homestay-card-horizontal"
+      url="/pages/homestay-detail/index?id={{item.id}}"
+      wx:for="{{homestayPreviewList}}"
+      wx:key="id"
+    >
+      <image class="homestay-card-img" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="homestay-card-content">
+        <view class="homestay-card-header">
+          <text class="homestay-card-name">{{item.name}}</text>
+          <view class="homestay-card-tag">{{item.type}}</view>
+        </view>
+        <text class="homestay-card-desc">{{item.reason}}</text>
+        <view class="homestay-card-footer">
+          <text class="homestay-card-price">¥{{item.price}}<text class="homestay-card-unit">/晚起</text></text>
+          <view class="homestay-card-btn">去预订</view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+</view>
+
+<!-- 高德地图显示智绘王屋风景区景点 -->
+<view class="map-container">
+  <text class="map-title">📍 智绘王屋风景区景点地图</text>
+  <!-- 路线选择器 -->
+  <view class="route-selector">
+    <view class="route-tabs">
+      <view class="route-tab {{currentRoute === 'walking' ? 'active' : ''}}" bindtap="switchRoute" data-route="walking">
+        步行登山
+      </view>
+      <view class="route-tab {{currentRoute === 'cable-walk' ? 'active' : ''}}" bindtap="switchRoute" data-route="cable-walk">
+        索道步行
+      </view>
+      <view class="route-tab {{currentRoute === 'cable-magic' ? 'active' : ''}}" bindtap="switchRoute" data-route="cable-magic">
+        索道魔毯
+      </view>
+    </view>
+  </view>
+  <view class="map-wrapper">
+    <map
+      id="wangwushanMap"
+      class="map"
+      longitude="{{longitude}}"
+      latitude="{{latitude}}"
+      scale="{{scale}}"
+      markers="{{markers}}"
+      polyline="{{currentPolyline}}"
+      circles="{{circles}}"
+      subkey="{{tencentMapKey}}"
+      show-location="{{true}}"
+      enable-poi="{{true}}"
+      enable-building="{{true}}"
+      enable-3D="{{true}}"
+      show-compass="{{true}}"
+      show-scale="{{false}}"
+      enable-zoom="{{true}}"
+      enable-scroll="{{true}}"
+      bindmarkertap="onMarkerTap"
+      bindtap="onMapTap"
+      bindregionchange="onRegionChange"
+    ></map>
+    <!-- 使用cover-view覆盖地图底部的logo和版权信息 -->
+    <cover-view class="map-cover-bottom">
+      <cover-text class="map-tip">📍 绿色圆点为起点，红色圆点为终点；民宿为红色标注点（图标）</cover-text>
+    </cover-view>
+    <!-- 自定义比例尺：文字在上，黑色横线两端竖线 -->
+    <cover-view class="map-scale-bar">
+      <cover-text class="map-scale-text">{{scaleLabel}}</cover-text>
+      <cover-view class="map-scale-line-wrap">
+        <cover-view class="map-scale-tick"></cover-view>
+        <cover-view class="map-scale-line"></cover-view>
+        <cover-view class="map-scale-tick"></cover-view>
+      </cover-view>
+    </cover-view>
+  </view>
+</view>

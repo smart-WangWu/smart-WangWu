@@ -1,0 +1,56 @@
+<!-- 王屋山美食推荐列表页：白色主体 + 浅米白卡片 -->
+<view class="food-page">
+  <!-- 1. 头部标题栏 -->
+  <view class="page-section-head">
+    <text class="page-section-head-text">王屋山美食推荐</text>
+  </view>
+
+  <!-- 2. 美食卡片列表 -->
+  <view class="card-list">
+    <view
+      class="merchant-card"
+      wx:for="{{merchantList}}"
+      wx:key="id"
+      hover-class="merchant-card--active"
+      data-id="{{item.id}}"
+      bindtap="onMerchantCardTap"
+    >
+      <!-- 图片层 -->
+      <view class="card-cover-wrap">
+        <image
+          class="card-cover-img"
+          src="{{item.imageUrl}}"
+          mode="aspectFill"
+          lazy-load="{{true}}"
+        />
+        <view class="card-cover-title">{{item.nameShort}}</view>
+        <view class="card-cover-meta">
+          <text class="card-cover-meta-text">{{item.experienceText}}</text>
+        </view>
+      </view>
+      <!-- 信息层 -->
+      <view class="card-body">
+        <view class="card-row-title">
+          <text class="card-name-full">{{item.nameFull}}</text>
+          <text class="card-sep">|</text>
+          <text class="card-loc">{{item.addressShort}}</text>
+        </view>
+        <view class="card-desc">{{item.highlight}}</view>
+        <view class="card-tags">
+          <text class="card-tag" wx:for="{{item.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+        </view>
+        <view class="card-footer">
+          <view class="card-price">{{item.priceText}}</view>
+          <view
+            class="card-btn-detail"
+            hover-class="card-btn-detail--active"
+            catchtap="onMerchantDetailTap"
+            data-id="{{item.id}}"
+          >
+            <text class="card-btn-detail-text">查看详情</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,242 @@
+.shop-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ============================ */
+/* 横向民宿卡片样式 (新设计) */
+/* ============================ */
+.shop-item-horizontal {
+  display: flex;
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(41, 103, 173, 0.08);
+  text-decoration: none;
+  color: inherit;
+}
+.shop-item-horizontal:active {
+  transform: scale(0.99);
+  transition: transform 0.2s;
+}
+
+.shop-item-img {
+  width: 200rpx;
+  height: 200rpx;
+  flex-shrink: 0;
+  border-radius: 20rpx 0 0 20rpx;
+}
+
+.shop-item-content {
+  flex: 1;
+  padding: 20rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.shop-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12rpx;
+  margin-bottom: 8rpx;
+}
+
+.shop-item-name {
+  flex: 1;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.shop-item-tag {
+  flex-shrink: 0;
+  font-size: 22rpx;
+  color: #1e5ea6;
+  background: rgba(30, 94, 166, 0.1);
+  padding: 4rpx 12rpx;
+  border-radius: 16rpx;
+  line-height: 1.4;
+}
+
+.shop-item-reason {
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 8rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shop-item-address {
+  font-size: 22rpx;
+  color: #999;
+  margin-bottom: 12rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shop-item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.shop-item-price {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #ff5722;
+  flex-shrink: 0;
+}
+
+.shop-item-unit {
+  font-size: 22rpx;
+  font-weight: 400;
+  color: #bbb;
+}
+
+.shop-item-btn {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #4a90e2, #1e5ea6);
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: 500;
+  padding: 10rpx 24rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  border-radius: 28rpx;
+  margin: 0;
+  border: none;
+  box-shadow: 0 2rpx 8rpx rgba(30, 94, 166, 0.2);
+}
+
+.shop-item-btn::after {
+  border: none;
+}
+
+/* 旧样式保留（兼容其他可能的引用） */
+.shop-item {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(41, 103, 173, 0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.shop-item:active {
+  transform: scale(0.99);
+  box-shadow: 0 2rpx 12rpx rgba(41, 103, 173, 0.12);
+}
+.shop-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 320rpx;
+  overflow: hidden;
+}
+.shop-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.shop-type-tag {
+  position: absolute;
+  top: 16rpx;
+  left: 16rpx;
+  padding: 6rpx 16rpx;
+  font-size: 24rpx;
+  color: #fff;
+  background: rgba(30, 94, 166, 0.85);
+  border-radius: 20rpx;
+}
+.shop-body {
+  padding: 24rpx 28rpx 28rpx;
+}
+.shop-name {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12rpx;
+  line-height: 1.3;
+}
+.shop-reason {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 12rpx;
+}
+.shop-address-wrap {
+  margin-bottom: 16rpx;
+}
+.shop-address {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.shop-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+.shop-price {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #ff5722;
+}
+.shop-price-unit {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #999;
+}
+.submit-book-btn {
+  background: linear-gradient(135deg, #4a90e2, #1e5ea6);
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: 500;
+  padding: 0 40rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  border-radius: 32rpx;
+  margin: 0;
+  border: none;
+  box-shadow: 0 4rpx 12rpx rgba(30, 94, 166, 0.2);
+}
+.submit-book-btn::after {
+  border: none;
+}
+.submit-book-btn:active {
+  transform: scale(0.96);
+  opacity: 0.95;
+}
+.shop-empty {
+  padding: 80rpx 40rpx;
+  text-align: center;
+}
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}

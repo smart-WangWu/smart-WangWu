@@ -1,0 +1,621 @@
+/* 自定义导航栏：左侧搜索栏 + 中间标题居中 + 右侧图标 */
+.home-nav-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #C8E6C9;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.home-nav-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 24rpx 0 20rpx;
+  box-sizing: border-box;
+}
+
+.home-search-bar {
+  flex: 0 1 auto;
+  max-width: 220rpx;
+  height: 64rpx;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 32rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx 0 16rpx;
+  margin-right: 12rpx;
+  box-sizing: border-box;
+}
+
+.home-nav-inner .home-nav-title {
+  flex-shrink: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.home-search-icon {
+  font-size: 28rpx;
+  margin-right: 12rpx;
+}
+
+.home-search-placeholder {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.home-nav-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.home-nav-icon {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  color: #333;
+}
+
+.home-nav-placeholder {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* 搜索浮层 */
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 2000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 180rpx;
+  box-sizing: border-box;
+}
+.search-panel {
+  width: 92%;
+  max-width: 680rpx;
+  max-height: 78vh;
+  background: #fff;
+  border-radius: 28rpx;
+  overflow: hidden;
+  box-shadow: 0 -8rpx 32rpx rgba(0,0,0,0.12);
+}
+.search-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  padding: 28rpx 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+  background: #fff;
+}
+.search-panel-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 80rpx;
+  background: #f5f6f8;
+  border-radius: 40rpx;
+  padding: 0 28rpx;
+  box-sizing: border-box;
+}
+.search-panel-icon { font-size: 34rpx; margin-right: 14rpx; opacity: 0.85; }
+.search-panel-input { flex: 1; font-size: 30rpx; color: #333; min-width: 0; }
+.search-placeholder { color: #aaa; font-size: 30rpx; }
+.search-panel-cancel { font-size: 30rpx; color: #1e5ea6; flex-shrink: 0; padding: 8rpx 0 8rpx 16rpx; }
+.search-results { max-height: 62vh; min-height: 240rpx; padding: 24rpx 24rpx 40rpx; box-sizing: border-box; }
+.search-section { margin-bottom: 28rpx; }
+.search-section-title {
+  font-size: 24rpx; color: #999; display: block; margin-bottom: 16rpx;
+  padding-left: 12rpx; border-left: 4rpx solid #1e5ea6; line-height: 1.4;
+}
+.search-result-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+  padding: 24rpx;
+  background: #f8f9fb;
+  border-radius: 20rpx;
+  margin-bottom: 16rpx;
+  transition: background 0.2s;
+}
+.search-result-item:active { background: #eef1f6; }
+.search-result-name { font-size: 30rpx; font-weight: 600; color: #333; }
+.search-result-extra { font-size: 24rpx; color: #888; }
+.search-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64rpx 32rpx;
+  text-align: center;
+}
+.search-empty-icon { font-size: 80rpx; margin-bottom: 24rpx; opacity: 0.6; }
+.search-empty-text { font-size: 28rpx; color: #666; margin-bottom: 12rpx; }
+.search-empty-hint { font-size: 24rpx; color: #aaa; }
+.search-empty-noresult .search-empty-icon { font-size: 72rpx; }
+.search-empty-initial .search-empty-text { font-size: 30rpx; color: #555; }
+
+/* ========== 首页主体样式（完整恢复） ========== */
+page {
+  background-color: #f0f7ff;
+  background-image: url("https://youke.xn--y7xa690gmna.cn/s1/2026/01/28/69799cf58a1f3.webp");
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: "PingFang SC", "Helvetica Neue", sans-serif;
+}
+
+/* 刀隶体 Regular 2（道境广场等） */
+@font-face {
+  font-family: "阿里妈妈刀隶体 Regular 2";
+  font-weight: 400;
+  src: url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/2iUPjxwWJsgv.woff2") format("woff2"),
+       url("https://at.alicdn.com/wf/webfont/5LuYNrGy8FTF/0YmgSqcioysB.woff") format("woff");
+  font-variation-settings: normal;
+  font-display: swap;
+}
+.webfont2 { font-family: "阿里妈妈刀隶体 Regular 2"; font-variation-settings: normal; }
+/* 天坛极顶强制刀隶体 */
+.attraction-card .card-title.webfont,
+.image-overlay .overlay-title.webfont {
+  font-family: "阿里妈妈刀隶体 Regular" !important;
+}
+/* 今日景区客流强制刀隶体（单独字体 客流） */
+.home-traffic-text.webfont-traffic {
+  font-family: "阿里妈妈刀隶体 客流" !important;
+}
+
+.swiper-container {
+  padding: 0 20rpx;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+}
+.poiul {
+  width: 100%;
+  height: 350rpx;
+  border-radius: 20rpx;
+  overflow: hidden;
+  position: relative;
+}
+.poiulk {
+  width: 100%;
+  height: 100%;
+  border-radius: 20rpx;
+  display: block;
+}
+
+/* 天气信息覆盖层 */
+.weather-overlay {
+  position: absolute;
+  bottom: 20rpx;
+  left: 40rpx;
+  z-index: 999;
+  pointer-events: auto;
+}
+.weather-content {
+  background: transparent;
+  border-radius: 20rpx;
+  padding: 24rpx 30rpx;
+  min-width: 280rpx;
+}
+.weather-top { display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 8rpx; }
+.weather-temp { font-size: 32rpx; font-weight: 600; color: #ffffff; }
+.weather-separator { font-size: 26rpx; color: rgba(255,255,255,0.9); margin: 0 6rpx; }
+.weather-icon { font-size: 28rpx; margin-right: 6rpx; }
+.weather-desc { font-size: 28rpx; color: rgba(255,255,255,0.9); }
+.weather-title { margin-bottom: 8rpx; }
+.weather-title-text { font-size: 26rpx; color: #ffffff; font-weight: 600; }
+.weather-info, .weather-bottom { font-size: 24rpx; color: rgba(255,255,255,0.85); }
+.weather-item { display: block; margin-bottom: 4rpx; }
+
+.custom-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
+.indicator-dot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: #ccc;
+  transition: all 0.2s;
+}
+.indicator-dot.active {
+  background: #4a90e2;
+  transform: scale(1.2);
+}
+
+.plmn {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 32rpx 20rpx;
+  flex-wrap: wrap;
+}
+.pkml {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+.pkml navigator { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #333; }
+.pkml image.container1 { width: 100rpx; height: 100rpx; margin-bottom: 12rpx; }
+.pkml text { font-size: 26rpx; color: #333; }
+
+/* 首页今日景区客流（独立样式，与团队页互不影响） */
+.home-traffic-wrap { padding: 0 12rpx 10rpx; }
+.home-traffic-banner {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 72rpx;
+  background: #ffffff;
+  border-radius: 16rpx;
+  border: 2rpx solid rgba(0,0,0,0.06);
+  box-sizing: border-box;
+  box-shadow: 0 6rpx 18rpx rgba(0,0,0,0.06);
+  padding: 0 12rpx;
+}
+.home-traffic-img { width: 100%; max-width: 640rpx; height: 72rpx; display: block; border-radius: 14rpx; }
+.home-traffic-text {
+  position: absolute;
+  font-size: 58rpx;
+  font-weight: bold;
+  color: #111111;
+  text-align: center;
+  z-index: 2;
+  text-shadow: none;
+  line-height: 1.1;
+}
+/* 今日景区客流已用 .webfont-traffic，此处不再统一改 .home-traffic-font */
+
+.attractions-list { padding: 0 20rpx 32rpx; }
+.attraction-card {
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-bottom: 28rpx;
+  box-shadow: 0 8rpx 28rpx rgba(0,0,0,0.08);
+}
+.card-image-wrapper { position: relative; width: 100%; height: 380rpx; overflow: hidden; }
+.card-main-image { width: 100%; height: 100%; display: block; }
+.image-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 24rpx;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 45%, transparent 65%, rgba(0,0,0,0.4) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.overlay-title {
+  font-size: 66rpx; /* 约等于减小 6px */
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: 2rpx;
+  text-shadow: 0 2rpx 10rpx rgba(0,0,0,0.35);
+}
+.experience-count { position: absolute; right: 20rpx; bottom: 20rpx; font-size: 22rpx; color: rgba(255,255,255,0.95); }
+.card-content { padding: 24rpx; }
+.card-title { font-size: 32rpx; font-weight: 600; color: #333; margin-bottom: 12rpx; }
+.card-description { font-size: 26rpx; color: #666; margin-bottom: 16rpx; line-height: 1.5; }
+.card-title-plain { font-family: "PingFang SC", "Helvetica Neue", sans-serif !important; }
+.card-details {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-bottom: 20rpx;
+  font-size: 24rpx;
+}
+.detail-item {
+  display: inline-block;
+  padding: 6rpx 12rpx;
+  border-radius: 10rpx;
+  background: rgba(102, 187, 106, 0.18);
+  color: #6fbf86;
+  font-weight: 600;
+  font-size: 22rpx;
+  line-height: 1.2;
+}
+.detail-separator {
+  display: inline;
+  color: #cfd8dc;
+}
+.card-footer { display: flex; justify-content: space-between; align-items: center; }
+.card-footer .price { font-size: 32rpx; font-weight: 600; color: #ff5722; }
+.book-btn {
+  padding: 0 36rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  background: linear-gradient(135deg, #ffb74d, #ff9800);
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: 600;
+  border-radius: 34rpx;
+  border: none;
+  box-shadow: 0 4rpx 12rpx rgba(255, 152, 0, 0.35);
+}
+.book-btn::after { border: none; }
+/* 卡片内预订为 view，由 navigator 整卡跳转 */
+.attraction-card .book-btn { display: inline-flex; align-items: center; justify-content: center; }
+
+.scenery-showcase { padding: 0 20rpx 32rpx; }
+.showcase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.header-left { display: flex; align-items: center; gap: 12rpx; }
+.diamond-icon { width: 12rpx; height: 12rpx; background: #5a9a6e; transform: rotate(45deg); }
+.header-title { font-size: 32rpx; font-weight: 600; color: #1e3a5f; }
+.header-right { flex-shrink: 0; }
+.more-link { font-size: 26rpx; color: #1e5ea6; text-decoration: none; }
+.scenery-showcase .diamond-icon { background: #8ec5e3; }
+.scenery-showcase .header-title { color: #333; }
+.scenery-showcase .more-link { color: #1e5ea6; text-decoration: none; }
+.scenery-scroll { white-space: nowrap; width: 100%; }
+.scenery-list { display: inline-flex; gap: 24rpx; padding: 8rpx 0; }
+.scenery-card { display: inline-block; width: 225rpx; flex-shrink: 0; border-radius: 8px; overflow: hidden; background: #fff; box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06); }
+.scenery-image-wrap { position: relative; width: 225rpx; height: 260rpx; border-radius: 8px; overflow: hidden; }
+.scenery-image { width: 225rpx; height: 260rpx; display: block; border-radius: 8px; }
+.scenery-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28rpx 12rpx 12rpx;
+  background: linear-gradient(transparent, rgba(0,0,0,0.65));
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+}
+.label-sep { color: rgba(255,255,255,0.9); font-size: 26rpx; font-weight: 600; flex-shrink: 0; }
+.scenery-name { font-size: 26rpx; font-weight: 600; color: #ffffff; text-shadow: 0 1rpx 4rpx rgba(0,0,0,0.4); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.homestay-preview { padding: 0 20rpx 32rpx; }
+.homestay-preview-list { display: flex; flex-direction: column; gap: 20rpx; }
+
+/* 横向民宿卡片样式 */
+.homestay-card-horizontal {
+  display: flex;
+  background: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-bottom: 0;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+  color: inherit;
+}
+.homestay-card-horizontal:active { transform: scale(0.99); transition: transform 0.12s; }
+
+/* 左侧图片 */
+.homestay-card-img {
+  width: 200rpx;
+  height: 200rpx;
+  flex-shrink: 0;
+  border-radius: 20rpx 0 0 20rpx;
+}
+
+/* 右侧内容区 */
+.homestay-card-content {
+  flex: 1;
+  padding: 20rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+/* 标题行：名称 + 类型标签 */
+.homestay-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12rpx;
+  margin-bottom: 10rpx;
+}
+
+.homestay-card-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.homestay-card-tag {
+  flex-shrink: 0;
+  font-size: 22rpx;
+  color: #1e5ea6;
+  background: rgba(30, 94, 166, 0.1);
+  padding: 4rpx 12rpx;
+  border-radius: 16rpx;
+  line-height: 1.4;
+}
+
+/* 描述文字 */
+.homestay-card-desc {
+  font-size: 24rpx;
+  color: #888;
+  line-height: 1.5;
+  margin-bottom: 12rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 底部：价格 + 按钮 */
+.homestay-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.homestay-card-price {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #ff5722;
+  flex-shrink: 0;
+}
+
+.homestay-card-unit {
+  font-size: 22rpx;
+  font-weight: 400;
+  color: #bbb;
+}
+
+.homestay-card-btn {
+  flex-shrink: 0;
+  font-size: 24rpx;
+  color: #1e5ea6;
+  padding: 10rpx 24rpx;
+  border: 1rpx solid #1e5ea6;
+  border-radius: 24rpx;
+  line-height: 1;
+}
+
+/* 旧样式保留（兼容其他页面） */
+.homestay-preview-card {
+  display: block; background: #fff; border-radius: 24rpx; overflow: hidden;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06); text-decoration: none; color: inherit;
+}
+.homestay-preview-img { width: 100%; height: 260rpx; display: block; background: #f5f5f5; }
+.homestay-preview-body { padding: 24rpx; }
+.homestay-preview-top {
+  display: flex; justify-content: space-between; align-items: center; gap: 16rpx; margin-bottom: 12rpx;
+}
+.homestay-preview-name {
+  flex: 1; min-width: 0; font-size: 30rpx; font-weight: 600; color: #333;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.homestay-preview-tag {
+  flex-shrink: 0; font-size: 22rpx; color: #1e5ea6; background: rgba(30,94,166,0.1);
+  padding: 6rpx 14rpx; border-radius: 20rpx;
+}
+.homestay-preview-reason {
+  font-size: 26rpx; color: #666; line-height: 1.5; margin-bottom: 16rpx;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; text-overflow: ellipsis;
+}
+.homestay-preview-footer {
+  display: flex; justify-content: space-between; align-items: center; gap: 16rpx;
+}
+.homestay-preview-price { font-size: 32rpx; font-weight: 600; color: #ff5722; flex-shrink: 0; }
+.homestay-preview-unit { font-size: 24rpx; font-weight: 400; color: #999; }
+.homestay-preview-btn {
+  flex-shrink: 0; font-size: 26rpx; color: #1e5ea6; padding: 12rpx 28rpx;
+  border: 1rpx solid #1e5ea6; border-radius: 28rpx;
+}
+
+.map-container { padding: 0 20rpx 40rpx; }
+.map-title { display: block; font-size: 32rpx; font-weight: 600; color: #333; text-align: center; margin-bottom: 24rpx; }
+.route-selector { margin-bottom: 20rpx; }
+.route-tabs { display: flex; gap: 16rpx; flex-wrap: wrap; }
+.route-tab {
+  flex: 1;
+  min-width: 0;
+  padding: 20rpx 24rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #666;
+  background: #f5f5f5;
+  border-radius: 12rpx;
+}
+.route-tab.active { background: #1e5ea6; color: #fff; font-weight: 500; }
+.map-wrapper { position: relative; width: 100%; height: 800rpx; border-radius: 20rpx; overflow: hidden; }
+.map { width: 100%; height: 100%; }
+/* 覆盖地图底部的 logo 和版权信息 */
+.map-cover-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60rpx;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 999;
+}
+.map-tip {
+  color: #666666;
+  font-size: 22rpx;
+  text-align: center;
+}
+/* 自定义比例尺：仅显示米/公里 */
+.map-scale-bar {
+  position: absolute;
+  bottom: 72rpx;
+  left: 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 998;
+}
+.map-scale-text { font-size: 24rpx; font-weight: 500; color: #000000; margin-bottom: 6rpx; }
+.map-scale-line-wrap { display: flex; align-items: flex-end; width: 120rpx; height: 16rpx; }
+.map-scale-tick { width: 2rpx; height: 12rpx; background: #000000; flex-shrink: 0; }
+.map-scale-line { flex: 1; height: 2rpx; background: #000000; margin: 0 2rpx; align-self: center; }
+
+/* 民宿地图气泡（备用） */
+.homestay-callout { display: flex; flex-direction: column; align-items: center; }
+.homestay-callout-bubble {
+  background: #ffffff;
+  border-radius: 16rpx;
+  padding: 10rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.12);
+  border: 2rpx solid #ffffff;
+}
+.homestay-callout-img { width: 100rpx; height: 100rpx; border-radius: 50%; display: block; }
+.homestay-callout-name {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-top: 10rpx;
+  text-align: center;
+  max-width: 200rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

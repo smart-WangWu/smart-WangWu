@@ -1,0 +1,70 @@
+<view class="page-container">
+  <!-- 头部：Logo+标题区（增加留白，避免拥挤） -->
+  <view class="header">
+    <image class="header-logo" src="https://gitee.com/ty-4895/picture/raw/master/20250823180019089.jpg" mode="widthFix"></image>
+    <view class="header-content">
+      <text class="main-title">愚公智旅</text>
+      <text class="sub-title">——智慧文旅赋能乡村振兴</text>
+      <text class="desc">  本团队以青春创新实践赋能王屋山乡村振兴，借智慧文旅激活乡村活力，解码其振兴密码，彰显青年助力乡村振兴的"智创"与担当。</text>
+    </view>
+  </view>
+
+  <!-- 导师信息区（卡片化+网格布局，避免文字堆叠） -->
+  <view class="card-section teacher-card">
+    <text class="section-title">指导老师</text>
+    <view class="teacher-grid">
+      <!-- 导师1 -->
+      <view class="teacher-item">
+        <text class="teacher-role"></text>
+        <text class="teacher-name">彭煜茗老师</text>
+        <text class="teacher-info">河南大学中原发展研究院 副教授</text>
+      </view>
+      <!-- 导师2 -->
+      <view class="teacher-item">
+        <text class="teacher-role"></text>
+        <text class="teacher-name">张霞老师</text>
+        <text class="teacher-info">河南大学中原发展研究院 副教授</text>
+      </view>
+      <!-- 导师3 -->
+      <view class="teacher-item">
+        <text class="teacher-role"></text>
+        <text class="teacher-name">郭益蓓老师</text>
+        <text class="teacher-info">河南大学高级金融学院助教</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 团队分组区（标签式设计，增强清新感） -->
+  <view class="card-section team-card">
+    <text class="section-title">团队成员</text>
+    <view class="team-groups">
+      <view class="team-group">
+        <view class="group-tag">技术组</view>
+        <text class="group-members">王新洲、张万琪、宰孟杰、张婧怡</text>
+      </view>
+      <view class="team-group">
+        <view class="group-tag">商业组</view>
+        <text class="group-members">席铭泽</text>
+      </view>
+      <view class="team-group">
+        <view class="group-tag">宣传组</view>
+        <text class="group-members">罗永清</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 社交导航区：抖音 / 小红书 / 视频号 -->
+  <view class="card-section social-card">
+    <text class="section-title">关注我们</text>
+    <text class="social-desc">扫码关注，获取更多王屋山资讯</text>
+    <view class="social-list">
+      <navigator wx:for="{{socialList}}" wx:key="name" url="{{item.path}}" class="social-item social-item-{{item.type}}" hover-class="social-item-hover">
+        <view class="social-icon-wrap">
+          <image class="social-img" src="{{item.icon}}" mode="aspectFill"></image>
+        </view>
+        <text class="social-name">{{item.name}}</text>
+        <text class="social-hint">点击前往</text>
+      </navigator>
+    </view>
+  </view>
+</view>

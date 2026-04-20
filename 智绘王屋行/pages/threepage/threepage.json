@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "王屋山攻略",
+  "navigationBarBackgroundColor": "#D4A574",
+  "usingComponents": {},
+  "onReachBottomDistance": 200,
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#efefef",
+  "backgroundTextStyle": "dark"
+}

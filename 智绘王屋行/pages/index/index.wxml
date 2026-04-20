@@ -1,0 +1,66 @@
+<view class="mine-page">
+  <!-- 顶部背景 + 用户信息 -->
+  <view class="mine-header">
+    <view class="mine-header-top">
+      <view class="mine-header-spacer"></view>
+      <view class="mine-header-icons">
+        <text class="mine-bell">🔔</text>
+      </view>
+    </view>
+
+    <!-- 用户信息卡片：头像 + 编辑图标 + 用户名（无会员标签） -->
+    <view class="user-info-card">
+      <view class="user-card-avatar-wrap">
+        <image class="user-card-avatar" src="{{userInfo.avatarUrl || defaultAvatarUrl}}" mode="aspectFill"></image>
+        <view class="user-card-edit" catchtap="onEditProfile">
+          <text class="user-card-edit-arrow">↗</text>
+        </view>
+      </view>
+      <view class="user-card-info">
+        <text class="user-card-name">{{userInfo.nickName || '用户'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 四个快捷入口：我的关注 / 零售订单 / 我的点赞 / 我的评论 -->
+  <view class="mine-section mine-shortcut-section">
+    <view
+      class="shortcut-item"
+      wx:for="{{shortcutList}}"
+      wx:key="key"
+      bindtap="onShortcutTap"
+      data-key="{{item.key}}"
+      data-url="{{item.url}}"
+    >
+      <view class="shortcut-icon">
+        <image wx:if="{{item.iconUrl}}" class="shortcut-icon-img" src="{{item.iconUrl}}" mode="aspectFit" />
+      </view>
+      <text class="shortcut-text">{{item.text}}</text>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="mine-section mine-list-section">
+    <view class="list-item" wx:for="{{featureList}}" wx:key="key" bindtap="onFeatureTap" data-key="{{item.key}}">
+      <view class="list-left">
+        <text class="list-icon">{{item.icon}}</text>
+        <text class="list-text">{{item.text}}</text>
+      </view>
+      <view class="list-right">
+        <text class="list-extra" wx:if="{{item.key === 'version'}}">{{version}}</text>
+        <text class="list-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 修改昵称弹窗 -->
+  <view class="nickname-modal-mask" wx:if="{{showNicknameEdit}}" catchtap="onNicknameCancel"></view>
+  <view class="nickname-modal" wx:if="{{showNicknameEdit}}">
+    <text class="nickname-modal-title">修改昵称</text>
+    <input class="nickname-modal-input" placeholder="请输入昵称" value="{{tempNickname}}" bindinput="onNicknameInput" focus="{{showNicknameEdit}}" />
+    <view class="nickname-modal-btns">
+      <view class="nickname-modal-btn cancel" bindtap="onNicknameCancel">取消</view>
+      <view class="nickname-modal-btn confirm" bindtap="onNicknameConfirm">确定</view>
+    </view>
+  </view>
+</view>

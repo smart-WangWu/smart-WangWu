@@ -1,0 +1,84 @@
+<!-- AI 助手页：对话列表 + 推荐问题 + 输入区 -->
+<view class="ai-page">
+  <view class="ai-statusbar" style="height: {{statusBarHeight}}px;"></view>
+  <view class="ai-nav" style="top: {{statusBarHeight}}px;">
+    <view class="ai-nav-back" bindtap="onBack">‹</view>
+    <text class="ai-nav-title">愚仔·智能助手</text>
+    <view class="ai-nav-right">
+      <text class="ai-nav-icon" bindtap="onClearChat">清空</text>
+    </view>
+  </view>
+
+  <!-- 初始主题区（无对话时整体居中于页面中部） -->
+  <view class="ai-initial-wrap {{messages.length ? 'has-msg' : ''}}">
+    <!-- AI 形象区域 -->
+    <view class="ai-character-wrap" wx:if="{{messages.length === 0}}">
+      <image class="ai-character" src="https://wang-img-bed.oss-cn-beijing.aliyuncs.com/img/Ai%E5%BD%A2%E8%B1%A1.png" mode="aspectFit"></image>
+    </view>
+
+    <!-- 标题区域（仅无对话时显示） -->
+    <view class="ai-title-section" wx:if="{{messages.length === 0}}">
+      <text class="ai-title">你可以这样问我</text>
+      <view class="ai-refresh-btn" bindtap="refreshSuggestions" hover-class="ai-refresh-hover">
+        <text class="ai-refresh-icon">↻</text>
+        <text class="ai-refresh-text">换一换</text>
+      </view>
+    </view>
+
+    <!-- 推荐问题列表 -->
+    <view class="ai-suggest" wx:if="{{messages.length === 0}}">
+      <view class="ai-suggest-list">
+        <view class="ai-suggest-item" wx:for="{{suggestions}}" wx:key="*this" bindtap="onSuggestionTap" data-text="{{item}}" hover-class="ai-item-hover">
+          <view class="ai-suggest-dot"></view>
+          <text class="ai-suggest-text">{{item}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 无对话时：输入区紧贴「你可以这样问我」下方 -->
+    <view class="ai-bottom-inline" wx:if="{{messages.length === 0}}">
+      <view class="ai-photo-tip" bindtap="onPhotoExplain">
+        <text class="ai-photo-tip-icon">📷</text>
+        <text class="ai-photo-tip-text">试试拍照讲解景区景点</text>
+      </view>
+      <view class="ai-input-bar">
+        <text class="ai-input-icon">🎤</text>
+        <input class="ai-input" placeholder="输入问题，向愚仔提问…" value="{{inputVal}}" bindinput="onInput" confirm-type="send" bindconfirm="onSend" placeholder-class="ai-input-placeholder" disabled="{{loading}}"/>
+        <view class="ai-send-btn {{inputVal && !loading ? 'active' : ''}}" bindtap="onSend" hover-class="ai-send-hover">↑</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 对话列表（有对话时显示） -->
+  <scroll-view class="ai-chat-wrap {{messages.length ? '' : 'no-msg'}}" scroll-y scroll-into-view="{{scrollToId}}" scroll-with-animation enhanced show-scrollbar="{{false}}">
+    <view class="ai-chat-list" id="chat-list">
+      <view class="ai-msg {{item.role === 'user' ? 'user' : 'assistant'}}" wx:for="{{messages}}" wx:key="id" id="msg-{{item.id}}">
+          <image wx:if="{{item.role === 'assistant'}}" class="ai-msg-avatar" src="https://wang-img-bed.oss-cn-beijing.aliyuncs.com/img/Ai%E5%BD%A2%E8%B1%A1.png" mode="aspectFill"></image>
+        <view class="ai-msg-bubble">
+          <image wx:if="{{item.tempFilePath}}" class="ai-msg-img" src="{{item.tempFilePath}}" mode="widthFix"/>
+          <text wx:if="{{item.content}}" class="ai-msg-text">{{item.content}}</text>
+        </view>
+        <view wx:if="{{item.role === 'user'}}" class="ai-msg-avatar user-avatar">我</view>
+      </view>
+      <view class="ai-msg assistant" wx:if="{{loading}}">
+        <image class="ai-msg-avatar" src="https://wang-img-bed.oss-cn-beijing.aliyuncs.com/img/Ai%E5%BD%A2%E8%B1%A1.png" mode="aspectFill"></image>
+        <view class="ai-msg-bubble loading-bubble">
+          <text class="ai-msg-text">愚仔正在想…</text>
+        </view>
+      </view>
+      <view class="ai-chat-bottom" id="chat-bottom"></view>
+    </view>
+  </scroll-view>
+
+  <!-- 有对话时底部固定输入区 -->
+  <view class="ai-bottom" wx:if="{{messages.length > 0}}">
+    <view class="ai-photo-tip" bindtap="onPhotoExplain">
+      <text class="ai-photo-tip-icon">📷</text>
+      <text class="ai-photo-tip-text">试试拍照讲解景区景点</text>
+    </view>
+    <view class="ai-input-bar">
+      <text class="ai-input-icon">🎤</text>
+      <input class="ai-input" placeholder="输入问题，向愚仔提问…" value="{{inputVal}}" bindinput="onInput" confirm-type="send" bindconfirm="onSend" placeholder-class="ai-input-placeholder" disabled="{{loading}}"/>
+      <view class="ai-send-btn {{inputVal && !loading ? 'active' : ''}}" bindtap="onSend" hover-class="ai-send-hover">↑</view>
+    </view>
+  </view>
+</view>

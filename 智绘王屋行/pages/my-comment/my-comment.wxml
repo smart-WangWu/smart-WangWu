@@ -1,0 +1,66 @@
+<!-- 我的评论页 -->
+<view class="page">
+
+  <!-- 统计 -->
+  <view class="stat-bar">
+    <text class="stat-num">{{totalCount}}</text>
+    <text class="stat-label">条评论</text>
+  </view>
+
+  <!-- 空态 -->
+  <view class="empty" wx:if="{{totalCount === 0}}">
+    <text class="empty-icon">📝</text>
+    <text class="empty-text">还没有发表过评论</text>
+    <text class="empty-hint">去美食商家页面发表你的用餐体验吧</text>
+    <view class="empty-btn" bindtap="onGoEat">去逛美食</view>
+  </view>
+
+  <!-- 列表 -->
+  <view class="review-list" wx:else>
+    <view class="review-card" wx:for="{{reviewList}}" wx:key="id" wx:for-index="idx">
+      <!-- 商家信息 -->
+      <view class="review-merchant" bindtap="onMerchantTap" data-id="{{item.merchantId}}">
+        <image class="review-merchant-img" src="{{item.merchantImageUrl}}" mode="aspectFill" />
+        <text class="review-merchant-name">{{item.merchantName || '王屋山美食'}}</text>
+        <text class="review-merchant-arrow">›</text>
+      </view>
+
+      <!-- 评论内容 -->
+      <view class="review-body">
+        <view class="review-score-row">
+          <view class="review-stars">
+            <block wx:for="{{item.starStates}}" wx:for-item="st" wx:key="*this">
+              <text wx:if="{{st === 'full'}}" class="rstar rstar--on">★</text>
+              <text wx:else class="rstar">★</text>
+            </block>
+          </view>
+          <text class="review-mood" wx:if="{{item.mood}}">{{item.mood}}</text>
+          <text class="review-date">{{item.date}}</text>
+        </view>
+        <text class="review-content">{{item.content}}</text>
+
+        <!-- 图片 -->
+        <view class="review-pics" wx:if="{{item.images && item.images.length > 0}}">
+          <image
+            class="review-pic"
+            wx:for="{{item.images}}"
+            wx:for-item="pic"
+            wx:key="*this"
+            src="{{pic}}"
+            mode="aspectFill"
+          />
+        </view>
+      </view>
+
+      <!-- 删除按钮 -->
+      <view class="review-footer">
+        <view class="review-del" bindtap="onDelTap" data-id="{{item.id}}" data-merchantid="{{item.merchantId}}">
+          删除
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部安全区 -->
+  <view class="safe-bottom" />
+</view>
